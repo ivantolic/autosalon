@@ -3,7 +3,7 @@ import { supabase } from '../supabaseClient'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import '../styles/LoginStyles.css'
+import '../styles/Login.css'
 
 const Login = () => {
     const { user } = useAuth()

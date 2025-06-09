@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import '../styles/RegisterStyles.css'
+import '../styles/Register.css'
 
 const Register = () => {
     const [email, setEmail] = useState('')

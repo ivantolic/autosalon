@@ -8,13 +8,13 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // Prvo ucitavanje sessiona
+        // Prvo učitavanje sessiona
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null)
             setLoading(false)
         })
 
-        // Slusaj promjene logina
+        // Slušaj promjene logina
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
             setUser(session?.user ?? null)
         })
@@ -24,8 +24,13 @@ export const AuthProvider = ({ children }) => {
         }
     }, [])
 
+    const signOut = async () => {
+        await supabase.auth.signOut()
+        setUser(null)
+    }
+
     return (
-        <AuthContext.Provider value={{ user, loading }}>
+        <AuthContext.Provider value={{ user, loading, signOut }}>
             {children}
         </AuthContext.Provider>
     )

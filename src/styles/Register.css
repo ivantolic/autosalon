@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.register-container {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 2.5rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.register-container input::placeholder {
+  color: #aaa;
+}
+
+.register-container button {
+  width: 100%;
+  padding: 1rem;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  display: block;
+}
+
+.register-container button:hover {
+  background-color: white;
+  color: #ffcc00;
+  border-color: #ffcc00;
+}
+
+.register-container p {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 14px;
+}
+
+.register-container a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+}
