@@ -1,0 +1,93 @@
+/* AddVehicle.css */
+
+.add-vehicle-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.add-vehicle-container h2 {
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  text-align: center;
+}
+
+.add-vehicle-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.add-vehicle-container input[type="text"],
+.add-vehicle-container input[type="number"],
+.add-vehicle-container textarea,
+.add-vehicle-container select {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.add-vehicle-container input[type="text"]:focus,
+.add-vehicle-container input[type="number"]:focus,
+.add-vehicle-container textarea:focus,
+.add-vehicle-container select:focus {
+  border-color: #ffcc00;
+  outline: none;
+}
+
+.add-vehicle-container textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.add-vehicle-container label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+.add-vehicle-container input[type="file"] {
+  cursor: pointer;
+}
+
+.add-vehicle-container button {
+  margin-top: 1rem;
+  background-color: black;
+  color: #ffcc00;
+  font-weight: 700;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-vehicle-container button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+.error-message {
+  color: #ff0000;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-align: center;
+}
