@@ -6,8 +6,11 @@ import '../styles/AddVehicle.css';
 const AddVehicle = () => {
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+  const [variants, setVariants] = useState([]);
+
   const [selectedBrandId, setSelectedBrandId] = useState(null);
   const [selectedModelId, setSelectedModelId] = useState(null);
+  const [selectedVariantId, setSelectedVariantId] = useState(null);
 
   const [newBrandName, setNewBrandName] = useState('');
   const [newModelName, setNewModelName] = useState('');
@@ -50,9 +53,12 @@ const AddVehicle = () => {
 
   // Dohvati modele kad se promijeni odabrana marka
   useEffect(() => {
+    setSelectedModelId(null);
+    setVariants([]);
+    setSelectedVariantId(null);
+
     if (!selectedBrandId) {
       setModels([]);
-      setSelectedModelId(null);
       return;
     }
     const fetchModels = async () => {
@@ -70,6 +76,31 @@ const AddVehicle = () => {
     fetchModels();
   }, [selectedBrandId]);
 
+  // Dohvati varijante za odabrani model
+  useEffect(() => {
+    setSelectedVariantId(null);
+    if (!selectedModelId) {
+      setVariants([]);
+      return;
+    }
+
+    const fetchVariants = async () => {
+      const { data, error } = await supabase
+        .from('model_variants')
+        .select('*')
+        .eq('model_id', selectedModelId)
+        .order('variant_name', { ascending: true });
+
+      if (error) {
+        setError('Greška pri dohvaćanju varijanti: ' + error.message);
+      } else {
+        setVariants(data);
+      }
+    };
+
+    fetchVariants();
+  }, [selectedModelId]);
+
   const handleFormChange = (e) => {
     setForm(prev => ({
       ...prev,
@@ -84,18 +115,17 @@ const AddVehicle = () => {
 
     let brandId = selectedBrandId;
     let modelId = selectedModelId;
+    let tipValue = form.tip;
 
     if (useNewBrand) {
       if (!newBrandName.trim()) {
         setError('Unesite naziv nove marke.');
         return;
       }
-      // Provjeri postoji li marka već (case insensitive)
       const existingBrand = brands.find(b => b.name.toLowerCase() === newBrandName.trim().toLowerCase());
       if (existingBrand) {
         brandId = existingBrand.id;
       } else {
-        // Dodaj novu marku u bazu
         const { data: newBrand, error: brandError } = await supabase
           .from('brands')
           .insert([{ name: newBrandName.trim() }])
@@ -120,15 +150,17 @@ const AddVehicle = () => {
         setError('Unesite naziv novog modela.');
         return;
       }
-      // Provjeri postoji li model već za tu marku (case insensitive)
+      if (!tipValue) {
+        setError('Molimo odaberite tip vozila za novi model.');
+        return;
+      }
       const existingModel = models.find(m => m.name.toLowerCase() === newModelName.trim().toLowerCase());
       if (existingModel) {
         modelId = existingModel.id;
       } else {
-        // Dodaj novi model u bazu
         const { data: newModel, error: modelError } = await supabase
           .from('vehicle_models')
-          .insert([{ name: newModelName.trim(), brand_id: brandId }])
+          .insert([{ name: newModelName.trim(), brand_id: brandId, type: tipValue }])
           .select()
           .single();
         if (modelError) {
@@ -143,6 +175,8 @@ const AddVehicle = () => {
         setError('Odaberite model ili unesite novi.');
         return;
       }
+      // Ako je postoji model, tip se uzima iz varijante modela pa nema potrebe uzimati tip iz forme
+      tipValue = null;
     }
 
     if (!coverImage) {
@@ -153,9 +187,20 @@ const AddVehicle = () => {
       setError('Molimo odaberite kategoriju vozila.');
       return;
     }
-    if (!form.tip) {
-      setError('Molimo odaberite tip vozila.');
+    // Ako je odabrana varijanta, tip vozila ce biti iz nje, a inace iz forme
+    // Za novi model auta se trazi tip 
+    // a za postojeci se tip uzima iz varijante modela
+    if (!useNewModel && !selectedVariantId) {
+      setError('Molimo odaberite varijantu modela.');
       return;
+    }
+
+    // Dohvati tip iz odabrane varijante ako postoji
+    if (!useNewModel && selectedVariantId) {
+      const variant = variants.find(v => v.id === selectedVariantId);
+      if (variant) {
+        tipValue = variant.type;
+      }
     }
 
     // Unos vozila
@@ -163,11 +208,12 @@ const AddVehicle = () => {
       .from('vehicles')
       .insert([{
         model_id: modelId,
+        variant_id: selectedVariantId,
         naziv: form.naziv,
         cijena: Number(form.cijena),
         godina: Number(form.godina),
         category: form.category,
-        tip: form.tip,
+        tip: tipValue,
         gorivo: form.gorivo,
         snaga: Number(form.snaga),
         kilometraza: Number(form.kilometraza),
@@ -224,7 +270,6 @@ const AddVehicle = () => {
       }
     }
 
-    // Reset formi
     setSuccess('Vozilo uspješno dodano!');
     setForm({
       naziv: '',
@@ -239,6 +284,7 @@ const AddVehicle = () => {
     });
     setSelectedBrandId(null);
     setSelectedModelId(null);
+    setSelectedVariantId(null);
     setNewBrandName('');
     setNewModelName('');
     setUseNewBrand(false);
@@ -328,13 +374,49 @@ const AddVehicle = () => {
             ))}
           </select>
         ) : (
-          <input
-            type="text"
-            placeholder="Unesite naziv novog modela"
-            value={newModelName}
-            onChange={e => setNewModelName(e.target.value)}
-            disabled={!selectedBrandId && !useNewBrand}
-          />
+          <>
+            <input
+              type="text"
+              placeholder="Unesite naziv novog modela"
+              value={newModelName}
+              onChange={e => setNewModelName(e.target.value)}
+              disabled={!selectedBrandId && !useNewBrand}
+            />
+            <label>Tip vozila</label>
+            <select
+              name="tip"
+              value={form.tip}
+              onChange={handleFormChange}
+              required={useNewModel}
+              disabled={!useNewModel}
+            >
+              <option value="">-- Odaberite tip --</option>
+              <option value="sedan">Sedan</option>
+              <option value="suv">SUV</option>
+              <option value="hatchback">Hatchback</option>
+              <option value="coupe">Coupe</option>
+              <option value="kabriolet">Kabriolet</option>
+              <option value="karavan">Karavan</option>
+            </select>
+          </>
+        )}
+
+        {variants.length > 0 && !useNewModel && (
+          <>
+            <label>Varijanta modela</label>
+            <select
+              value={selectedVariantId || ''}
+              onChange={e => setSelectedVariantId(e.target.value || null)}
+              required={!useNewModel}
+            >
+              <option value="">-- Odaberite varijantu --</option>
+              {variants.map(variant => (
+                <option key={variant.id} value={variant.id}>
+                  {variant.variant_name} ({variant.type})
+                </option>
+              ))}
+            </select>
+          </>
         )}
 
         <label>Kategorija vozila</label>
@@ -348,22 +430,6 @@ const AddVehicle = () => {
           <option value="novo">Novo</option>
           <option value="rabljeno">Rabljeno</option>
           <option value="luksuzno">Luksuzno</option>
-        </select>
-
-        <label>Tip vozila</label>
-        <select
-          name="tip"
-          value={form.tip}
-          onChange={handleFormChange}
-          required
-        >
-          <option value="">-- Odaberite tip --</option>
-          <option value="sedan">Sedan</option>
-          <option value="suv">SUV</option>
-          <option value="hatchback">Hatchback</option>
-          <option value="coupe">Coupe</option>
-          <option value="kabriolet">Kabriolet</option>
-          <option value="karavan">Karavan</option>
         </select>
 
         <input
