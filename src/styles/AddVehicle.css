@@ -98,6 +98,42 @@
   border-radius: 6px;
   border: 1px solid #ddd;
   margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  box-shadow: 0 1px 4px #0001;
+  transition: outline 0.18s, box-shadow 0.2s;
+}
+
+/* Samo crveni outline bez blur efekta na hover */
+.image-preview-hover .image-preview {
+  outline: 2.5px solid #ff3232 !important;
+  box-shadow: 0 2px 12px #ff323230;
+}
+
+.cover-preview-wrapper,
+.additional-preview-wrapper {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Tooltip na hover */
+.cover-preview-wrapper[title]:hover:after,
+.additional-preview-wrapper[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  background: #ff3232;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 2px 10px;
+  border-radius: 5px;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+  margin-top: 4px;
+  pointer-events: none;
 }
 
 .additional-previews {
@@ -128,6 +164,12 @@
 .add-vehicle-container button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.input-error {
+  color: #d32f2f;
+  font-size: 0.98em;
+  margin-left: 1rem;
 }
 
 .error-message, .success-message {

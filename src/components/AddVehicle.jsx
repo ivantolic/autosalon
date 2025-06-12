@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/AddVehicle.css';
@@ -28,7 +28,7 @@ const AddVehicle = () => {
     transmission: '',
     color: '',
     tip: '', // za novi model
-    doors: '', // dodano za broj vrata
+    doors: '', // broj vrata
   });
 
   const [errors, setErrors] = useState({
@@ -41,12 +41,19 @@ const AddVehicle = () => {
 
   const [coverImage, setCoverImage] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
+  const [coverHovered, setCoverHovered] = useState(false);
+
   const [additionalImages, setAdditionalImages] = useState([]);
   const [additionalPreviews, setAdditionalPreviews] = useState([]);
+  const [hoveredImage, setHoveredImage] = useState(null);
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Dodano: Ref za file inpute
+  const coverInputRef = useRef(null);
+  const additionalInputRef = useRef(null);
 
   // Dohvati brandove
   useEffect(() => {
@@ -125,7 +132,6 @@ const AddVehicle = () => {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-
     setForm(prev => ({ ...prev, [name]: value }));
 
     // Validacije
@@ -148,19 +154,32 @@ const AddVehicle = () => {
         ...prev,
         doors: (doorsNum >= 1 && doorsNum <= 7) ? '' : 'Broj vrata mora biti između 1 i 7',
       }));
-
-      if (name === 'power') {
-        setErrors(prev => ({
-          ...prev,
-          power: Number(value) > 0 ? '' : 'Snaga (ks) mora biti veća od 0'
-        }));
-      }
-
+    }
+    if (name === 'power') {
+      setErrors(prev => ({
+        ...prev,
+        power: Number(value) > 0 ? '' : 'Snaga (ks) mora biti veća od 0'
+      }));
     }
   };
 
-  const handleAddImages = (e) => {
-    setAdditionalImages(prev => [...prev, ...Array.from(e.target.files)]);
+  // Brisanje glavne slike + reset inputa
+  const handleRemoveCoverImage = () => {
+    setCoverImage(null);
+    setCoverPreview(null);
+    if (coverInputRef.current) coverInputRef.current.value = '';
+  };
+
+  // Brisanje dodatne slike + reset inputa ako obrišeš sve slike
+  const handleRemoveAdditionalImage = (index) => {
+    setAdditionalImages(prev => {
+      const updated = prev.filter((_, i) => i !== index);
+      // Resetiraj input ako nema više slika
+      if (updated.length === 0 && additionalInputRef.current) {
+        additionalInputRef.current.value = '';
+      }
+      return updated;
+    });
   };
 
   const validateBeforeSubmit = () => {
@@ -364,6 +383,8 @@ const AddVehicle = () => {
     setCoverPreview(null);
     setAdditionalImages([]);
     setAdditionalPreviews([]);
+    if (coverInputRef.current) coverInputRef.current.value = '';
+    if (additionalInputRef.current) additionalInputRef.current.value = '';
     setLoading(false);
   };
 
@@ -514,7 +535,6 @@ const AddVehicle = () => {
 
         <fieldset className="form-section">
           <legend>Osnovni podaci</legend>
-
           <div className="form-row">
             <label htmlFor="title">Naslov vozila</label>
             <input
@@ -595,7 +615,6 @@ const AddVehicle = () => {
 
         <fieldset className="form-section">
           <legend>Tehničke karakteristike</legend>
-
           <div className="form-row">
             <label htmlFor="power">Snaga (ks)</label>
             <input
@@ -670,7 +689,6 @@ const AddVehicle = () => {
 
         <fieldset className="form-section">
           <legend>Slike</legend>
-
           <div className="file-input-row">
             <label>Naslovna slika:</label>
             <input
@@ -678,13 +696,23 @@ const AddVehicle = () => {
               accept="image/*"
               onChange={e => setCoverImage(e.target.files[0])}
               required
+              ref={coverInputRef}
             />
             {coverPreview && (
-              <img
-                src={coverPreview}
-                alt="Naslovna slika preview"
-                className="image-preview"
-              />
+              <div
+                className={`cover-preview-wrapper${coverHovered ? ' image-preview-hover' : ''}`}
+                onMouseEnter={() => setCoverHovered(true)}
+                onMouseLeave={() => setCoverHovered(false)}
+                onClick={handleRemoveCoverImage}
+                title="Klikni za brisanje slike"
+                style={{ display: 'inline-block', cursor: 'pointer' }}
+              >
+                <img
+                  src={coverPreview}
+                  alt="Naslovna slika preview"
+                  className="image-preview"
+                />
+              </div>
             )}
           </div>
 
@@ -695,15 +723,25 @@ const AddVehicle = () => {
               accept="image/*"
               multiple
               onChange={e => setAdditionalImages(prev => [...prev, ...Array.from(e.target.files)])}
+              ref={additionalInputRef}
             />
             <div className="additional-previews">
               {additionalPreviews.map((src, idx) => (
-                <img
+                <div
                   key={idx}
-                  src={src}
-                  alt={`Dodatna slika ${idx + 1}`}
-                  className="image-preview"
-                />
+                  className={`additional-preview-wrapper${hoveredImage === idx ? ' image-preview-hover' : ''}`}
+                  onMouseEnter={() => setHoveredImage(idx)}
+                  onMouseLeave={() => setHoveredImage(null)}
+                  onClick={() => handleRemoveAdditionalImage(idx)}
+                  title="Klikni za brisanje slike"
+                  style={{ display: 'inline-block', cursor: 'pointer' }}
+                >
+                  <img
+                    src={src}
+                    alt={`Dodatna slika ${idx + 1}`}
+                    className="image-preview"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -712,7 +750,6 @@ const AddVehicle = () => {
         <button type="submit" disabled={loading}>
           {loading ? 'Dodavanje...' : 'Dodaj vozilo'}
         </button>
-
       </form>
 
       {error && <p className="error-message">{error}</p>}
