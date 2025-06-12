@@ -5,6 +5,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AdminRoute from './routes/AdminRoute';
 import AddVehicle from './components/AddVehicle';
+import AudiPage from './components/AudiPage';
+import SeatPage from './components/SeatPage';
 import './App.css';
 
 function App() {
@@ -23,6 +25,9 @@ function App() {
                             </AdminRoute>
                         }
                     />
+                    {/* Dodano: Audi brand page */}
+                    <Route path="/brands/audi" element={<AudiPage />} />
+                    <Route path="/brands/seat" element={<SeatPage />} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
