@@ -17,6 +17,10 @@ const AddVehicle = () => {
   const [useNewBrand, setUseNewBrand] = useState(false);
   const [useNewModel, setUseNewModel] = useState(false);
 
+  // Dodaj state za dodatnu opremu (featurese)
+  const [featureInput, setFeatureInput] = useState('');
+  const [featureList, setFeatureList] = useState([]);
+
   const [form, setForm] = useState({
     title: '',
     price: '',
@@ -27,8 +31,8 @@ const AddVehicle = () => {
     mileage: '',
     transmission: '',
     color: '',
-    tip: '', // za novi model
-    doors: '', // broj vrata
+    tip: '',
+    doors: '',
   });
 
   const [errors, setErrors] = useState({
@@ -51,7 +55,6 @@ const AddVehicle = () => {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Dodano: Ref za file inpute
   const coverInputRef = useRef(null);
   const additionalInputRef = useRef(null);
 
@@ -130,11 +133,22 @@ const AddVehicle = () => {
     return () => urls.forEach(url => URL.revokeObjectURL(url));
   }, [additionalImages]);
 
+  // Feature functions
+  const handleAddFeature = () => {
+    if (featureInput.trim() && !featureList.includes(featureInput.trim())) {
+      setFeatureList(prev => [...prev, featureInput.trim()]);
+      setFeatureInput('');
+    }
+  };
+
+  const handleRemoveFeature = (idx) => {
+    setFeatureList(prev => prev.filter((_, i) => i !== idx));
+  };
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
 
-    // Validacije
     if (name === 'price') {
       setErrors(prev => ({ ...prev, price: Number(value) > 0 ? '' : 'Cijena mora biti veća od 0' }));
     }
@@ -163,18 +177,15 @@ const AddVehicle = () => {
     }
   };
 
-  // Brisanje glavne slike + reset inputa
   const handleRemoveCoverImage = () => {
     setCoverImage(null);
     setCoverPreview(null);
     if (coverInputRef.current) coverInputRef.current.value = '';
   };
 
-  // Brisanje dodatne slike + reset inputa ako obrišeš sve slike
   const handleRemoveAdditionalImage = (index) => {
     setAdditionalImages(prev => {
       const updated = prev.filter((_, i) => i !== index);
-      // Resetiraj input ako nema više slika
       if (updated.length === 0 && additionalInputRef.current) {
         additionalInputRef.current.value = '';
       }
@@ -358,6 +369,22 @@ const AddVehicle = () => {
       }
     }
 
+    // SPREMANJE DODATNE OPREME
+    if (featureList.length > 0) {
+      const featuresToInsert = featureList.map(f => ({
+        vehicle_id: vehicleId,
+        feature: f,
+      }));
+      const { error: featuresError } = await supabase
+        .from('vehicle_features')
+        .insert(featuresToInsert);
+      if (featuresError) {
+        setError('Greška kod spremanja dodatne opreme: ' + featuresError.message);
+        setLoading(false);
+        return;
+      }
+    }
+
     setSuccess('Vozilo uspješno dodano!');
     setForm({
       title: '',
@@ -383,6 +410,8 @@ const AddVehicle = () => {
     setCoverPreview(null);
     setAdditionalImages([]);
     setAdditionalPreviews([]);
+    setFeatureList([]);
+    setFeatureInput('');
     if (coverInputRef.current) coverInputRef.current.value = '';
     if (additionalInputRef.current) additionalInputRef.current.value = '';
     setLoading(false);
@@ -391,9 +420,8 @@ const AddVehicle = () => {
   return (
     <div className="add-vehicle-container">
       <h2>Dodaj vozilo</h2>
-
       <form onSubmit={handleSubmit} noValidate>
-
+        {/* --- Marka i model --- */}
         <fieldset className="form-section">
           <legend>Marka i model vozila</legend>
           <div className="form-row">
@@ -417,7 +445,6 @@ const AddVehicle = () => {
               </label>
             </div>
           </div>
-
           {!useNewBrand ? (
             <div className="form-row">
               <select
@@ -442,7 +469,6 @@ const AddVehicle = () => {
               />
             </div>
           )}
-
           <div className="form-row">
             <label>Model vozila</label>
             <div>
@@ -466,7 +492,6 @@ const AddVehicle = () => {
               </label>
             </div>
           </div>
-
           {!useNewModel ? (
             <div className="form-row">
               <select
@@ -513,7 +538,6 @@ const AddVehicle = () => {
               </div>
             </>
           )}
-
           {variants.length > 0 && !useNewModel && (
             <div className="form-row">
               <label>Varijanta modela</label>
@@ -533,6 +557,7 @@ const AddVehicle = () => {
           )}
         </fieldset>
 
+        {/* --- Osnovni podaci --- */}
         <fieldset className="form-section">
           <legend>Osnovni podaci</legend>
           <div className="form-row">
@@ -547,7 +572,6 @@ const AddVehicle = () => {
               required
             />
           </div>
-
           <div className="form-row">
             <label htmlFor="category">Kategorija</label>
             <select
@@ -563,7 +587,6 @@ const AddVehicle = () => {
               <option value="luksuzno">Luksuzno</option>
             </select>
           </div>
-
           <div className="form-row">
             <label htmlFor="price">Cijena</label>
             <input
@@ -579,7 +602,6 @@ const AddVehicle = () => {
             />
             {errors.price && <span className="input-error">{errors.price}</span>}
           </div>
-
           <div className="form-row">
             <label htmlFor="year">Godina</label>
             <input
@@ -595,7 +617,6 @@ const AddVehicle = () => {
             />
             {errors.year && <span className="input-error">{errors.year}</span>}
           </div>
-
           <div className="form-row">
             <label htmlFor="fuel_type">Vrsta goriva</label>
             <select
@@ -613,6 +634,7 @@ const AddVehicle = () => {
           </div>
         </fieldset>
 
+        {/* --- Tehničke karakteristike --- */}
         <fieldset className="form-section">
           <legend>Tehničke karakteristike</legend>
           <div className="form-row">
@@ -629,7 +651,6 @@ const AddVehicle = () => {
             />
             {errors.power && <span className="input-error">{errors.power}</span>}
           </div>
-
           <div className="form-row">
             <label htmlFor="mileage">Kilometraža</label>
             <input
@@ -644,7 +665,6 @@ const AddVehicle = () => {
             />
             {errors.mileage && <span className="input-error">{errors.mileage}</span>}
           </div>
-
           <div className="form-row">
             <label htmlFor="transmission">Mjenjač</label>
             <select
@@ -658,7 +678,6 @@ const AddVehicle = () => {
               <option value="automatski">Automatski</option>
             </select>
           </div>
-
           <div className="form-row">
             <label htmlFor="color">Boja</label>
             <input
@@ -669,7 +688,6 @@ const AddVehicle = () => {
               onChange={handleFormChange}
             />
           </div>
-
           <div className="form-row">
             <label htmlFor="doors">Broj vrata</label>
             <input
@@ -687,6 +705,46 @@ const AddVehicle = () => {
           </div>
         </fieldset>
 
+        {/* --- Dodatna oprema --- */}
+        <fieldset className="form-section">
+          <legend>Dodatna oprema</legend>
+          <div className="feature-section">
+            <div className="feature-add-row">
+              <input
+                type="text"
+                placeholder="Unesi novu opciju (npr. Senzori za kišu)"
+                value={featureInput}
+                onChange={e => setFeatureInput(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleAddFeature();
+                  }
+                }}
+              />
+              <button type="button" onClick={handleAddFeature}>
+                Dodaj opciju
+              </button>
+            </div>
+            <ul className="feature-list">
+              {featureList.map((feature, idx) => (
+                <li key={idx}>
+                  {feature}
+                  <button
+                    type="button"
+                    className="feature-remove-btn"
+                    onClick={() => handleRemoveFeature(idx)}
+                  >
+                    Ukloni
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </fieldset>
+
+
+        {/* --- Slike --- */}
         <fieldset className="form-section">
           <legend>Slike</legend>
           <div className="file-input-row">
@@ -715,7 +773,6 @@ const AddVehicle = () => {
               </div>
             )}
           </div>
-
           <div className="file-input-row">
             <label>Dodatne slike:</label>
             <input

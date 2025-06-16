@@ -3,4 +3,5 @@ body, html, #root {
   padding: 0;
   height: 100%;
   font-family: 'Segoe UI', Roboto, 'Open Sans', sans-serif;
+  overflow-x: hidden;
 }

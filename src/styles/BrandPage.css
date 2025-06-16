@@ -14,6 +14,7 @@
 
 .brand-hero-img-full {
   width: 100vw;
+  overflow-x: hidden;
   min-height: 590px;
   max-height: 720px;
   object-fit: cover;
