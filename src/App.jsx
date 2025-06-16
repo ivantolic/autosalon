@@ -7,6 +7,7 @@ import AdminRoute from './routes/AdminRoute';
 import AddVehicle from './components/AddVehicle';
 import AudiPage from './components/AudiPage';
 import SeatPage from './components/SeatPage';
+import SkodaPage from './components/SkodaPage'
 import './App.css';
 
 function App() {
@@ -25,9 +26,9 @@ function App() {
                             </AdminRoute>
                         }
                     />
-                    {/* Dodano: Audi brand page */}
                     <Route path="/brands/audi" element={<AudiPage />} />
                     <Route path="/brands/seat" element={<SeatPage />} />
+                    <Route path="/brands/skoda" element={<SkodaPage />} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
