@@ -6,28 +6,40 @@
   box-shadow: 0 4px 24px #0001;
   overflow: hidden;
   margin-bottom: 22px;
+  min-width: 320px;
+  max-width: 370px;
+  min-height: 430px;
   transition: box-shadow 0.22s;
 }
+
 .vehicle-card:hover {
   box-shadow: 0 8px 32px #0003;
 }
+
 .vehicle-card-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   background: #eee;
 }
+
 .vehicle-card-info {
+  flex: 1 1 auto;
   padding: 1rem 1.1rem 0.8rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .vehicle-card-info h3 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
+  min-height: 2.2em;
+  display: flex;
+  align-items: flex-end;
 }
+
 .vehicle-card-meta,
 .vehicle-card-details {
   font-size: 0.97rem;
@@ -35,26 +47,48 @@
   display: flex;
   gap: 10px;
 }
+
 .vehicle-card-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.7rem;
+  margin-top: auto;
+  padding-bottom: 1rem;
+  gap: 10px;
 }
+
 .vehicle-card-price {
   font-size: 1.2rem;
   font-weight: 700;
   color: #da1a32;
+  white-space: nowrap;
 }
+
+/* GUMBI - isti izgled i visina */
+.vehicle-card-link,
+.vehicle-delete-btn {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 42px;
+  line-height: 1.2;
+  text-align: center;
+  vertical-align: middle;
+  border: none;
+  transition: background 0.2s;
+  cursor: pointer;
+  min-width: 92px;
+}
+
 .vehicle-card-link {
   background: #222;
   color: #fff;
-  border-radius: 6px;
-  padding: 7px 18px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background 0.2s;
+  margin-right: 7px;
 }
+
 .vehicle-card-link:hover {
   background: #da1a32;
 }
@@ -62,15 +96,9 @@
 .vehicle-delete-btn {
   background: #ff3232;
   color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-size: 1rem;
-  margin-left: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
+  margin: 0;
 }
+
 .vehicle-delete-btn:hover {
   background: #b80000;
 }

@@ -1,0 +1,43 @@
+.admin-requests-container {
+  max-width: 1100px;
+  margin: 3rem auto;
+  background: #fff;
+  border-radius: 11px;
+  box-shadow: 0 6px 32px #0001;
+  padding: 2.3rem 2.5rem;
+}
+.admin-requests-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.admin-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 1.04rem;
+}
+.admin-requests-table th, .admin-requests-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.admin-requests-table th {
+  background: #fafafa;
+  font-weight: 600;
+}
+.admin-requests-table select {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.zavrsi-btn {
+  background: #262726;
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.zavrsi-btn:hover {
+  background: #298d31;
+}

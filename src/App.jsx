@@ -8,7 +8,10 @@ import AddVehicle from './components/AddVehicle';
 import AudiPage from './components/AudiPage';
 import SeatPage from './components/SeatPage';
 import SkodaPage from './components/SkodaPage';
-import VehiclesPage from './components/VehiclesPage'; // <--- NOVI IMPORT
+import VehiclesPage from './components/VehiclesPage';
+import VehicleDetails from './components/VehicleDetails';
+import PurchaseRequest from './components/PurchaseRequest';
+import AdminPurchaseRequests from './components/AdminPurchaseRequests';
 import './App.css';
 
 function App() {
@@ -19,6 +22,8 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+
+                    {/* ADMIN SAMO */}
                     <Route
                         path="/admin/add-vehicle"
                         element={
@@ -27,10 +32,22 @@ function App() {
                             </AdminRoute>
                         }
                     />
+                    <Route
+                        path="/purchase-requests"
+                        element={
+                            <AdminRoute>
+                                <AdminPurchaseRequests />
+                            </AdminRoute>
+                        }
+                    />
+
+                    {/* SVI OSTALI */}
                     <Route path="/brands/audi" element={<AudiPage />} />
                     <Route path="/brands/seat" element={<SeatPage />} />
                     <Route path="/brands/skoda" element={<SkodaPage />} />
-                    <Route path="/vozila" element={<VehiclesPage />} />   {/* NOVA RUTA */}
+                    <Route path="/vozila" element={<VehiclesPage />} />
+                    <Route path="/vozila/:id" element={<VehicleDetails />} />
+                    <Route path="/kupnja/:id" element={<PurchaseRequest />} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

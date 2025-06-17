@@ -1,0 +1,63 @@
+.purchase-form-container {
+  max-width: 430px;
+  margin: 2rem auto;
+  background: #fafafa;
+  padding: 2rem 2.5rem;
+  border-radius: 9px;
+  box-shadow: 0 4px 24px #0001;
+}
+
+.purchase-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.purchase-form-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.purchase-form-vehicle-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #5c5c5c;
+  display: block;
+}
+.purchase-form-container label {
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.purchase-form-container input,
+.purchase-form-container textarea {
+  border-radius: 6px;
+  border: 1.5px solid #ccc;
+  padding: 8px 12px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  min-width: 0;
+}
+.purchase-form-container textarea {
+  height: 120px;
+  min-height: 100px;
+  max-height: 180px;
+}
+.purchase-form-container button {
+  margin-top: 1rem;
+  background: #da1a32;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+.success-message { color: #298d31; margin-top: 0.5rem; text-align: center; }
+.error-message { color: #d32f2f; margin-top: 0.5rem; text-align: center; }

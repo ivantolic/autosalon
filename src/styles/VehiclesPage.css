@@ -3,7 +3,6 @@
   margin: 2rem auto;
   padding: 0 1rem;
 }
-
 .vehicles-page-container h2 {
   text-align: center;
   margin-bottom: 2rem;
@@ -11,7 +10,6 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
-
 .vehicles-list {
   display: flex;
   flex-wrap: wrap;
