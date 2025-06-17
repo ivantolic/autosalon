@@ -7,7 +7,8 @@ import AdminRoute from './routes/AdminRoute';
 import AddVehicle from './components/AddVehicle';
 import AudiPage from './components/AudiPage';
 import SeatPage from './components/SeatPage';
-import SkodaPage from './components/SkodaPage'
+import SkodaPage from './components/SkodaPage';
+import VehiclesPage from './components/VehiclesPage'; // <--- NOVI IMPORT
 import './App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/brands/audi" element={<AudiPage />} />
                     <Route path="/brands/seat" element={<SeatPage />} />
                     <Route path="/brands/skoda" element={<SkodaPage />} />
+                    <Route path="/vozila" element={<VehiclesPage />} />   {/* NOVA RUTA */}
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
