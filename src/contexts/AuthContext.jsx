@@ -8,29 +8,38 @@ export const AuthProvider = ({ children }) => {
     const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getProfile = async (sessionUser) => {
-            const { data, error } = await supabase
+    // Funkcija za dohvat (i eventualno insert) profila
+    const getOrCreateProfile = async (sessionUser) => {
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', sessionUser.id)
+            .single();
+
+        if (data && data.role) {
+            setRole(data.role);
+        } else {
+            // Ako profil ne postoji, kreiraj ga (ovo radi samo kad se user prvi put logira)
+            const { error: insertError } = await supabase
                 .from('profiles')
-                .select('role')
-                .eq('id', sessionUser.id)
-                .single();
+                .insert({ id: sessionUser.id, role: 'user' });
+            if (!insertError) setRole('user');
+            else setRole(null);
+        }
+    };
 
-            if (data) setRole(data.role);
-            else setRole(null); // fallback
-        };
-
+    useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             const sessionUser = session?.user ?? null;
             setUser(sessionUser);
-            if (sessionUser) getProfile(sessionUser);
+            if (sessionUser) getOrCreateProfile(sessionUser);
             setLoading(false);
         });
 
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
             const sessionUser = session?.user ?? null;
             setUser(sessionUser);
-            if (sessionUser) getProfile(sessionUser);
+            if (sessionUser) getOrCreateProfile(sessionUser);
             else setRole(null);
         });
 

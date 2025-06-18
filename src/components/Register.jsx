@@ -9,18 +9,20 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [info, setInfo] = useState('');
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
+        setInfo('');
 
         if (password !== confirmPassword) {
             setError('Lozinke se ne podudaraju.');
             return;
         }
 
-        const { data, error: signUpError } = await supabase.auth.signUp({
+        const { error: signUpError } = await supabase.auth.signUp({
             email,
             password,
         });
@@ -30,28 +32,13 @@ const Register = () => {
             return;
         }
 
-        const user = data.user;
-        if (user) {
-            const { error: profileError } = await supabase
-                .from('profiles')
-                .insert({
-                    id: user.id,
-                    role: 'user', // defaultna uloga
-                });
-
-            if (profileError) {
-                setError('Korisnik registriran, ali nije spremljen u profil: ' + profileError.message);
-                return;
-            }
-        }
-
-        navigate('/login');
+        setInfo('Registracija uspješna! Provjerite e-mail i potvrdite račun.');
+        setTimeout(() => navigate('/login'), 3500);
     };
 
     return (
         <div className='register-container'>
             <h2>Registracija</h2>
-
             <form onSubmit={handleRegister}>
                 <input
                     type="email"
@@ -60,7 +47,6 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-
                 <input
                     type="password"
                     placeholder="Lozinka"
@@ -68,7 +54,6 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-
                 <input
                     type="password"
                     placeholder="Ponovno unesite lozinku"
@@ -76,14 +61,12 @@ const Register = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
-
                 <button type="submit">Registriraj se</button>
             </form>
-
             <p>
                 Već imate račun? <Link to="/login">Prijavite se</Link>
             </p>
-
+            {info && <p className="info-message">{info}</p>}
             {error && <p className="error-message">{error}</p>}
         </div>
     );
