@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/Header.css';
 
-const brands = ['Audi', 'Seat', 'Skoda'];
+const brands = ['Audi', 'Seat', 'Škoda'];
 
 const Header = () => {
   const { user, role, signOut } = useAuth();
@@ -44,7 +44,7 @@ const Header = () => {
         <div className='dropdown'>
           <span className='dropdown-title'>Usluge</span>
           <div className='dropdown-content'>
-            <Link to='/service-requests'>Dogovor servisa</Link>
+            <Link to='/servis/novi'>Dogovor servisa</Link>
             <Link to='/vozila'>Dogovor kupnje vozila</Link>
           </div>
         </div>

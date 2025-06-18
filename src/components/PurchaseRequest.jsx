@@ -76,7 +76,7 @@ const PurchaseRequest = () => {
             rows={5}
           />
         </label>
-        <button type="submit">Pošalji zahtjev</button>
+        <button type="submit" className="purchase-form-send-btn">Pošalji zahtjev</button>
         {success && <div className="success-message">{success}</div>}
         {error && <div className="error-message">{error}</div>}
       </form>

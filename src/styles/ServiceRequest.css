@@ -1,4 +1,4 @@
-.purchase-form-container {
+.service-form-container {
   max-width: 430px;
   margin: 2rem auto;
   background: #f4f9fa;
@@ -7,51 +7,44 @@
   box-shadow: 0 4px 22px #0001;
 }
 
-.purchase-form-container form {
+.service-form-container form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.purchase-form-title {
+.service-form-container h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.6rem;
   text-align: left;
 }
 
-.purchase-form-vehicle-title {
-  font-size: 1.18rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-  color: #5c5c5c;
-  display: block;
-}
-
-.purchase-form-container label {
+.service-form-container label {
   font-weight: 500;
   margin-bottom: 0.2rem;
 }
 
-.purchase-form-container input,
-.purchase-form-container textarea {
+.service-form-container input,
+.service-form-container select,
+.service-form-container textarea {
   border-radius: 6px;
   border: 1.5px solid #87a2b9;
   padding: 8px 12px;
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
-  resize: none;
   min-width: 0;
+  resize: none;
 }
 
-.purchase-form-container textarea {
+.service-form-container textarea {
   height: 110px;
   min-height: 90px;
   max-height: 170px;
 }
 
-.purchase-form-container button {
+.service-form-container button {
   margin-top: 1rem;
   background: #2077b3;
   color: #fff;
@@ -65,7 +58,7 @@
   transition: background 0.15s;
 }
 
-.purchase-form-container button:hover {
+.service-form-container button:hover {
   background: #195c8a;
 }
 

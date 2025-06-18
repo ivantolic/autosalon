@@ -1,0 +1,58 @@
+.admin-service-requests-container {
+  max-width: 1100px;
+  margin: 3rem auto;
+  background: #fff;
+  border-radius: 11px;
+  box-shadow: 0 6px 32px #0001;
+  padding: 2.3rem 2.5rem;
+}
+
+.admin-service-requests-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-service-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 1.04rem;
+}
+
+.admin-service-requests-table th,
+.admin-service-requests-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.admin-service-requests-table th {
+  background: #f2f9ff; 
+  font-weight: 600;
+}
+
+.admin-service-requests-table select {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Gumb za brisanje (custom klasa za ovu komponentu) */
+.service-zavrsi-btn {
+  background: #262726;
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.service-zavrsi-btn:hover {
+  background: #2077b3;
+}
+
+.admin-service-requests-loading {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 2.5rem 0;
+}
