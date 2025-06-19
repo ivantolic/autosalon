@@ -1,0 +1,69 @@
+.vehicles-filter-sidebar {
+  background: #fff;
+  padding: 2rem 1.7rem;
+  border-radius: 13px;
+  box-shadow: 0 4px 24px #0001;
+  max-width: 320px;
+  min-width: 270px;
+  margin-bottom: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.vehicles-filter-sidebar h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.vehicles-filter-sidebar label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+  color: #111;
+  font-size: 1rem;
+  gap: 0.28rem;
+}
+
+.vehicles-filter-sidebar select,
+.vehicles-filter-sidebar input[type="number"] {
+  padding: 8px 11px;
+  border-radius: 7px;
+  border: 1.5px solid #6f6f6f;
+  background: #f8fafb;
+  font-size: 1rem;
+  margin-top: 0.1rem;
+  outline: none;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+
+.vehicles-filter-sidebar select:focus,
+.vehicles-filter-sidebar input[type="number"]:focus {
+  border: 1.5px solid #ffcc00;      
+  box-shadow: 0 0 0 2px #fff6cc;    
+}
+
+.vehicles-filter-sidebar select:hover,
+.vehicles-filter-sidebar input[type="number"]:hover {
+  border: 1.5px solid #ffcc00;
+}
+
+.vehicles-filter-sidebar input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+select{
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .vehicles-filter-sidebar {
+    max-width: 100%;
+    min-width: 0;
+    padding: 1.1rem 0.7rem;
+  }
+}

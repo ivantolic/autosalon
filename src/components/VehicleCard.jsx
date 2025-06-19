@@ -2,19 +2,16 @@ import { supabase } from '../supabaseClient';
 import '../styles/VehicleCard.css';
 
 const VehicleCard = ({ vehicle, isAdmin, onDelete }) => {
-  // Brisanje vozila i svih vezanih podataka (slike, favorites, features, requests...)
   const handleDelete = async () => {
     const confirmed = window.confirm('Želite li stvarno obrisati ovo vozilo? Ova radnja je nepovratna!');
     if (!confirmed) return;
 
-    // Prvo obrisi sve vezane podatke
     await supabase.from('vehicle_images').delete().eq('vehicle_id', vehicle.id);
     await supabase.from('vehicle_features').delete().eq('vehicle_id', vehicle.id);
     await supabase.from('favorites').delete().eq('vehicle_id', vehicle.id);
     await supabase.from('service_requests').delete().eq('vehicle_id', vehicle.id);
     await supabase.from('purchase_requests').delete().eq('vehicle_id', vehicle.id);
 
-    // Zatim obrisi vozilo samo na kraju
     const { error } = await supabase.from('vehicles').delete().eq('id', vehicle.id);
     if (error) {
       alert('Došlo je do greške pri brisanju vozila!');
@@ -33,20 +30,23 @@ const VehicleCard = ({ vehicle, isAdmin, onDelete }) => {
       />
       <div className="vehicle-card-info">
         <h3>{vehicle.title}</h3>
-        <div className="vehicle-card-meta">
-          <span>{vehicle.year} • {vehicle.mileage} km</span>
-          <span>{vehicle.power} KS</span>
-        </div>
-        <div className="vehicle-card-details">
-          <span>{vehicle.fuel_type}</span>
-          <span>{vehicle.transmission}</span>
-          <span>{vehicle.color}</span>
+        <div className="vehicle-card-specs-2col">
+          <div>
+            <span>{vehicle.year || '-'}</span>
+            <span>{vehicle.fuel_type || '-'}</span>
+            <span>{vehicle.transmission || '-'}</span>
+          </div>
+          <div>
+            <span>{vehicle.mileage ? `${vehicle.mileage} km` : '-'}</span>
+            <span>{vehicle.power ? `${vehicle.power} KS` : '-'}</span>
+            <span>{vehicle.color || '-'}</span>
+          </div>
         </div>
         <div className="vehicle-card-bottom">
           <span className="vehicle-card-price">
             {vehicle.price ? vehicle.price.toLocaleString('hr-HR') : '-'} €
           </span>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
             <a href={`/vozila/${vehicle.id}`} className="vehicle-card-link">
               Detalji
             </a>

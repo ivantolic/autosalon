@@ -7,43 +7,29 @@ import seatArona from "../assets/seat/seat-arona.jpg";
 import seatAteca from "../assets/seat/seat-ateca.jpg";
 
 const models = [
-  {
-      name: "Ibiza",
-      image: seatIbiza,
-    },
-    {
-      name: "Leon",
-      image: seatLeon,
-    },
-    {
-      name: "Arona",
-      image: seatArona,
-    },
-    {
-      name: "Ateca",
-      image: seatAteca,
-    },
+  { name: "Ibiza", image: seatIbiza },
+  { name: "Leon", image: seatLeon },
+  { name: "Arona", image: seatArona },
+  { name: "Ateca", image: seatAteca },
 ];
 
 const SeatPage = () => {
   const navigate = useNavigate();
 
   const handleModelClick = (model) => {
-    // navigate(`/vehicles?brand=seat&model=${model}`);
+    navigate(`/vozila?brand=seat&model=${model.toLowerCase()}`);
   };
 
   const handleAllSeat = () => {
-    // navigate(`/vehicles?brand=seat`);
+    navigate(`/vozila?brand=seat`);
   };
 
   return (
     <div>
-      {/* HERO dio izvan containera zbog edge-to-edge efekta */}
       <div className="brand-hero-full">
         <img src={seatHero} alt="Seat hero" className="brand-hero-img-full" />
         <div className="brand-hero-title-full">Seat</div>
       </div>
-
       <div className="brand-page-container">
         <div className="brand-models-section">
           <h2>Seat modeli:</h2>

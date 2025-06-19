@@ -1,41 +1,56 @@
 .service-form-container {
   max-width: 430px;
-  margin: 2rem auto;
-  background: #f4f9fa;
-  padding: 2rem 2.5rem;
-  border-radius: 10px;
+  margin: 3rem auto 0 auto;
+  background: #f5f5f5;
+  padding: 2.3rem 2.5rem 2.1rem 2.5rem;
+  border-radius: 13px;
   box-shadow: 0 4px 22px #0001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.service-form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  color: #222;
+  text-align: center;
 }
 
 .service-form-container form {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.service-form-container h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  text-align: left;
-}
-
 .service-form-container label {
   font-weight: 500;
   margin-bottom: 0.2rem;
+  color: #242424;
 }
 
 .service-form-container input,
-.service-form-container select,
-.service-form-container textarea {
-  border-radius: 6px;
-  border: 1.5px solid #87a2b9;
+.service-form-container textarea,
+.service-form-container select {
+  border-radius: 7px;
+  border: 1.5px solid #6f6f6f;
   padding: 8px 12px;
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
-  min-width: 0;
   resize: none;
+  min-width: 0;
+  transition: border 0.18s;
+  background: #f8fafb;
+}
+
+.service-form-container input:focus,
+.service-form-container textarea:focus,
+.service-form-container select:focus {
+  border: 1.5px solid #ffcc00;
+  box-shadow: 0 0 0 2px #fff8cc;
 }
 
 .service-form-container textarea {
@@ -46,8 +61,8 @@
 
 .service-form-container button {
   margin-top: 1rem;
-  background: #2077b3;
-  color: #fff;
+  background: #222;
+  color: #ffffff;
   border: none;
   padding: 12px 0;
   border-radius: 7px;
@@ -55,38 +70,74 @@
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.5px;
 }
 
-.service-form-container button:hover {
-  background: #195c8a;
+.service-form-container button:hover,
+.service-form-container button:focus {
+  background: #ffcc00;
+  color: #222;
 }
 
 .success-message {
   color: #298d31;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   text-align: center;
+  font-size: 1.08rem;
 }
 
 .error-message {
   color: #d32f2f;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   text-align: center;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  max-width: 350px;
 }
 
 .to-my-requests-btn {
   display: inline-block;
   margin-top: 1.2rem;
   text-align: center;
-  color: #2077b3;
+  color: #ffcc00;
   background: none;
   font-weight: 600;
   font-size: 1rem;
-  text-decoration: underline;
   cursor: pointer;
   transition: color 0.15s;
+  text-decoration: none;
 }
 
-.to-my-requests-btn:hover {
-  color: #da1a32;
+.to-my-requests-btn:hover,
+.to-my-requests-btn:focus {
+  text-decoration: underline;
+}
+
+.purchase-login-link {
+  color: #ffcc00;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.purchase-login-link:hover {
+  text-decoration: underline;
+}
+
+.centered-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .service-form-container {
+    padding: 1.4rem 0.6rem;
+    max-width: 98vw;
+  }
 }

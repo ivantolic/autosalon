@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import '../styles/BrandPage.css';
-import audiHero from "../assets/audi/heroaudi.jpg"; // ili ./AudiHero.jpg ili što već koristiš
+import audiHero from "../assets/audi/heroaudi.jpg";
 import audiA1 from "../assets/audi/audi-a1.jpg";
 import audiA3 from "../assets/audi/audi-a3.jpg";
 import audiA4 from "../assets/audi/audi-a4.jpg";
@@ -14,70 +14,31 @@ import audiQ5 from "../assets/audi/audi-q5.jpg";
 import audiQ7 from "../assets/audi/audi-q7.jpg";
 import audiQ8 from "../assets/audi/audi-q8.jpg";
 
-
 const models = [
-  {
-    name: "A1",
-    image: audiA1,
-  },
-  {
-    name: "A3",
-    image: audiA3,
-  },
-  {
-    name: "A4",
-    image: audiA4,
-  },
-  {
-    name: "A5",
-    image: audiA5,
-  },
-  {
-    name: "A6",
-    image: audiA6,
-  },
-  {
-    name: "A7",
-    image: audiA7,
-  },
-  {
-    name: "A8",
-    image: audiA8,
-  },
-  {
-    name: "Q2",
-    image: audiQ2,
-  },
-  {
-    name: "Q3",
-    image: audiQ3,
-  },
-  {
-    name: "Q5",
-    image: audiQ5,
-  },
-  {
-    name: "Q7",
-    image: audiQ7,
-  },
-  {
-    name: "Q8",
-    image: audiQ8,
-  },
-  
-  
+  { name: "A1", image: audiA1 },
+  { name: "A3", image: audiA3 },
+  { name: "A4", image: audiA4 },
+  { name: "A5", image: audiA5 },
+  { name: "A6", image: audiA6 },
+  { name: "A7", image: audiA7 },
+  { name: "A8", image: audiA8 },
+  { name: "Q2", image: audiQ2 },
+  { name: "Q3", image: audiQ3 },
+  { name: "Q5", image: audiQ5 },
+  { name: "Q7", image: audiQ7 },
+  { name: "Q8", image: audiQ8 },
 ];
 
 const AudiPage = () => {
   const navigate = useNavigate();
 
   const handleModelClick = (model) => {
-    // Za sada ne radi ništa, kasnije stavi filtriranu rutu
-    // navigate(`/vehicles?brand=audi&model=${model}`);
+    // model u query param, mala slova radi konzistentnosti
+    navigate(`/vozila?brand=audi&model=${model.toLowerCase()}`);
   };
 
   const handleAllAudi = () => {
-    // navigate(`/vehicles?brand=audi`);
+    navigate(`/vozila?brand=audi`);
   };
 
   return (
@@ -86,8 +47,6 @@ const AudiPage = () => {
         <img src={audiHero} alt="Audi hero" className="brand-hero-img-full" />
         <div className="brand-hero-title-full">Audi</div>
       </div>
-
-
       <div className="brand-models-section">
         <h2>Audi modeli:</h2>
         <div className="brand-models-grid">
@@ -104,7 +63,6 @@ const AudiPage = () => {
           ))}
         </div>
       </div>
-
       <div className="brand-all-vehicles">
         <button onClick={handleAllAudi} className="brand-all-btn">
           Prikaži sva Audi vozila

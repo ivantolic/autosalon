@@ -11,49 +11,25 @@ import skodaFabia from "../assets/skoda/skoda-fabia.jpg";
 import skodaKodiaq from "../assets/skoda/skoda-kodiaq.jpg";
 
 const models = [
-  {
-    name: "KAROQ",
-    image: skodaKaroq,
-  },
-  {
-    name: "SCALA",
-    image: skodaScala,
-  },
-  {
-    name: "SUPERB",
-    image: skodaSuperb,
-  },
-  {
-    name: "OCTAVIA",
-    image: skodaOctavia,
-  },
-  {
-    name: "KAMIQ",
-    image: skodaKamiq,
-  },
-  {
-    name: "ENYAQ",
-    image: skodaEnyaq,
-  },
-  {
-    name: "FABIA",
-    image: skodaFabia,
-  },
-  {
-    name: "KODIAQ",
-    image: skodaKodiaq,
-  },
+  { name: "KAROQ", image: skodaKaroq },
+  { name: "SCALA", image: skodaScala },
+  { name: "SUPERB", image: skodaSuperb },
+  { name: "OCTAVIA", image: skodaOctavia },
+  { name: "KAMIQ", image: skodaKamiq },
+  { name: "ENYAQ", image: skodaEnyaq },
+  { name: "FABIA", image: skodaFabia },
+  { name: "KODIAQ", image: skodaKodiaq },
 ];
 
 const SkodaPage = () => {
   const navigate = useNavigate();
 
   const handleModelClick = (model) => {
-    // navigate(`/vehicles?brand=skoda&model=${model}`);
+    navigate(`/vozila?brand=skoda&model=${model.toLowerCase()}`);
   };
 
   const handleAllSkoda = () => {
-    // navigate(`/vehicles?brand=skoda`);
+    navigate(`/vozila?brand=skoda`);
   };
 
   return (
@@ -62,7 +38,6 @@ const SkodaPage = () => {
         <img src={skodaHero} alt="Škoda hero" className="brand-hero-img-full" />
         <div className="brand-hero-title-full">Škoda</div>
       </div>
-
       <div className="brand-models-section">
         <h2>Škoda modeli:</h2>
         <div className="brand-models-grid">
@@ -79,7 +54,6 @@ const SkodaPage = () => {
           ))}
         </div>
       </div>
-
       <div className="brand-all-vehicles">
         <button onClick={handleAllSkoda} className="brand-all-btn">
           Prikaži sva Škoda vozila

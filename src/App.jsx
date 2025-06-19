@@ -57,7 +57,7 @@ function App() {
                     {/* SVI OSTALI */}
                     <Route path="/brands/audi" element={<AudiPage />} />
                     <Route path="/brands/seat" element={<SeatPage />} />
-                    <Route path="/brands/skoda" element={<SkodaPage />} />
+                    <Route path="/brands/škoda" element={<SkodaPage />} />
                     <Route path="/vozila" element={<VehiclesPage />} />
                     <Route path="/vozila/:id" element={<VehicleDetails />} />
                     <Route path="/kupnja/:id" element={<PurchaseRequest />} />

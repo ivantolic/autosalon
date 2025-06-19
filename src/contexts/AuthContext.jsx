@@ -8,33 +8,46 @@ export const AuthProvider = ({ children }) => {
     const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Funkcija za dohvat (i eventualno insert) profila
+    // Dohvati/provjeri profil i postavi rolu
     const getOrCreateProfile = async (sessionUser) => {
-        const { data, error } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', sessionUser.id)
-            .single();
-
-        if (data && data.role) {
-            setRole(data.role);
-        } else {
-            // Ako profil ne postoji, kreiraj ga (ovo radi samo kad se user prvi put logira)
-            const { error: insertError } = await supabase
+        try {
+            const { data, error } = await supabase
                 .from('profiles')
-                .insert({ id: sessionUser.id, role: 'user' });
-            if (!insertError) setRole('user');
-            else setRole(null);
+                .select('role')
+                .eq('id', sessionUser.id)
+                .single();
+
+            if (data && data.role) {
+                setRole(data.role);
+            } else {
+                // Prvi login: napravi profil
+                const { error: insertError } = await supabase
+                    .from('profiles')
+                    .insert({ id: sessionUser.id, role: 'user' });
+                if (!insertError) setRole('user');
+                else setRole(null);
+            }
+        } catch (err) {
+            setRole(null);
         }
     };
 
+    // Prvi load: cekaj da user i rola budu setani prije nego maknes loading!
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        let ignore = false;
+
+        async function init() {
+            const { data: { session } } = await supabase.auth.getSession();
             const sessionUser = session?.user ?? null;
             setUser(sessionUser);
-            if (sessionUser) getOrCreateProfile(sessionUser);
-            setLoading(false);
-        });
+            if (sessionUser) {
+                await getOrCreateProfile(sessionUser); // cekaj
+            } else {
+                setRole(null);
+            }
+            if (!ignore) setLoading(false); // loading se mice tek kad imamo user & role
+        }
+        init();
 
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
             const sessionUser = session?.user ?? null;
@@ -44,6 +57,7 @@ export const AuthProvider = ({ children }) => {
         });
 
         return () => {
+            ignore = true;
             listener?.subscription.unsubscribe();
         };
     }, []);
@@ -52,6 +66,7 @@ export const AuthProvider = ({ children }) => {
         await supabase.auth.signOut();
         setUser(null);
         setRole(null);
+        setLoading(false);
     };
 
     return (

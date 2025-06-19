@@ -35,9 +35,9 @@ const Header = () => {
         <div className='dropdown'>
           <span className='dropdown-title'>Ponuda vozila</span>
           <div className='dropdown-content'>
-            <Link to='/vehicles?category=new'>Nova vozila</Link>
-            <Link to='/vehicles?category=used'>Rabljena vozila</Link>
-            <Link to='/vehicles?category=luxury'>Luksuzna vozila</Link>
+            <Link to='/vozila?category=new'>Nova vozila</Link>
+            <Link to='/vozila?category=used'>Rabljena vozila</Link>
+            <Link to='/vozila?category=luxury'>Luksuzna vozila</Link>
           </div>
         </div>
 

@@ -266,7 +266,7 @@ const AddVehicle = () => {
       } else {
         const { data: newModel, error: modelError } = await supabase
           .from('vehicle_models')
-          .insert([{ name: newModelName.trim(), brand_id: brandId, type: form.tip }])
+          .insert([{ name: newModelName.trim(), brand_id: brandId, category: form.tip }])
           .select()
           .single();
         if (modelError) {
@@ -757,18 +757,13 @@ const AddVehicle = () => {
               ref={coverInputRef}
             />
             {coverPreview && (
-              <div
-                className={`cover-preview-wrapper${coverHovered ? ' image-preview-hover' : ''}`}
-                onMouseEnter={() => setCoverHovered(true)}
-                onMouseLeave={() => setCoverHovered(false)}
-                onClick={handleRemoveCoverImage}
-                title="Klikni za brisanje slike"
-                style={{ display: 'inline-block', cursor: 'pointer' }}
-              >
+              <div className="cover-preview-wrapper">
                 <img
                   src={coverPreview}
                   alt="Naslovna slika preview"
                   className="image-preview"
+                  onClick={handleRemoveCoverImage}
+                  title="Klikni za brisanje slike"
                 />
               </div>
             )}
@@ -786,23 +781,22 @@ const AddVehicle = () => {
               {additionalPreviews.map((src, idx) => (
                 <div
                   key={idx}
-                  className={`additional-preview-wrapper${hoveredImage === idx ? ' image-preview-hover' : ''}`}
-                  onMouseEnter={() => setHoveredImage(idx)}
-                  onMouseLeave={() => setHoveredImage(null)}
-                  onClick={() => handleRemoveAdditionalImage(idx)}
-                  title="Klikni za brisanje slike"
-                  style={{ display: 'inline-block', cursor: 'pointer' }}
+                  className="additional-preview-wrapper"
+                  
                 >
                   <img
                     src={src}
                     alt={`Dodatna slika ${idx + 1}`}
                     className="image-preview"
+                    title="Klikni za brisanje slike"
+                    onClick={() => handleRemoveAdditionalImage(idx)}
                   />
                 </div>
               ))}
             </div>
           </div>
         </fieldset>
+
 
         <button type="submit" disabled={loading}>
           {loading ? 'Dodavanje...' : 'Dodaj vozilo'}

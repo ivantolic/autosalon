@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../supabaseClient';
-import '../styles/PurchaseRequest.css'
+import '../styles/PurchaseRequest.css';
 
 const PurchaseRequest = () => {
   const { id: vehicleId } = useParams();
@@ -15,9 +15,8 @@ const PurchaseRequest = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Dohvati naslov vozila
     const fetchTitle = async () => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('vehicles')
         .select('title')
         .eq('id', vehicleId)
@@ -26,6 +25,21 @@ const PurchaseRequest = () => {
     };
     fetchTitle();
   }, [vehicleId]);
+
+  // Ako nije logiran – show warning
+  if (!user) {
+    return (
+      <div className="purchase-form-container">
+        <h2 className="purchase-form-title">Dogovori kupnju vozila</h2>
+        <div className="centered-message">
+          <span className="error-message">
+            Morate biti prijavljeni kako biste poslali zahtjev za kupnju.<br />
+            <Link to="/login" className="purchase-login-link">Prijava</Link>
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +90,7 @@ const PurchaseRequest = () => {
             rows={5}
           />
         </label>
-        <button type="submit" className="purchase-form-send-btn">Pošalji zahtjev</button>
+        <button type="submit">Pošalji zahtjev</button>
         {success && <div className="success-message">{success}</div>}
         {error && <div className="error-message">{error}</div>}
       </form>

@@ -49,7 +49,11 @@ const MyServiceRequests = () => {
         </thead>
         <tbody>
           {requests.length === 0 ? (
-            <tr><td colSpan={6}>Nema servisnih zahtjeva.</td></tr>
+            <tr>
+              <td colSpan={6} style={{ textAlign: "center", color: "#888", fontStyle: "italic" }}>
+                Nema servisnih zahtjeva.
+              </td>
+            </tr>
           ) : (
             requests.map(req => (
               <tr key={req.id}>

@@ -10,6 +10,7 @@ const initialState = {
   brand: '',
   model: '',
   year: '',
+  registration: '', // DODANO
   contact: '',
   description: '',
 };
@@ -33,7 +34,7 @@ const ServiceRequest = () => {
       setError('Dozvoljeni su samo Audi, Seat ili Škoda.');
       return;
     }
-    if (!form.model || !form.year || !form.contact) {
+    if (!form.model || !form.year || !form.contact || !form.registration) { // Dodano registration
       setError('Sva polja osim opisa su obavezna.');
       return;
     }
@@ -42,6 +43,7 @@ const ServiceRequest = () => {
       brand: form.brand,
       model: form.model,
       year: form.year,
+      registration: form.registration, // Dodano registration
       contact_info: form.contact,
       description: form.description,
       status: 'pending',
@@ -74,6 +76,10 @@ const ServiceRequest = () => {
         <label>
           Godina:
           <input type="number" name="year" value={form.year} onChange={handleChange} required />
+        </label>
+        <label>
+          Registracija:
+          <input type="text" name="registration" value={form.registration} onChange={handleChange} required />
         </label>
         <label>
           Kontakt (telefon/mail):
