@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import '../styles/MyServiceRequests.css';
 
@@ -31,11 +32,25 @@ const MyServiceRequests = () => {
     fetchRequests();
   }, [user]);
 
+  if (!user) {
+    return (
+      <div className="my-service-requests centered-container">
+        <h2 className="my-service-requests-title">Moji zahtjevi za servis</h2>
+        <div className="centered-message">
+          <span className="error-message">
+            Morate biti prijavljeni kako biste vidjeli svoje servisne zahtjeve.
+          </span>
+          <Link to="/login" className="purchase-login-link">Prijava</Link>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) return <div className="my-service-requests-loading">Učitavanje...</div>;
 
   return (
     <div className="my-service-requests">
-      <h2>Moji zahtjevi za servis</h2>
+      <h2 className="my-service-requests-title">Moji zahtjevi za servis</h2>
       <table className="my-service-requests-table">
         <thead>
           <tr>

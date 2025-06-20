@@ -10,13 +10,13 @@ const initialState = {
   brand: '',
   model: '',
   year: '',
-  registration: '', // DODANO
+  registration: '',
   contact: '',
   description: '',
 };
 
 const ServiceRequest = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [form, setForm] = useState(initialState);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
@@ -34,7 +34,7 @@ const ServiceRequest = () => {
       setError('Dozvoljeni su samo Audi, Seat ili Škoda.');
       return;
     }
-    if (!form.model || !form.year || !form.contact || !form.registration) { // Dodano registration
+    if (!form.model || !form.year || !form.contact || !form.registration) {
       setError('Sva polja osim opisa su obavezna.');
       return;
     }
@@ -43,7 +43,7 @@ const ServiceRequest = () => {
       brand: form.brand,
       model: form.model,
       year: form.year,
-      registration: form.registration, // Dodano registration
+      registration: form.registration,
       contact_info: form.contact,
       description: form.description,
       status: 'pending',
@@ -56,6 +56,30 @@ const ServiceRequest = () => {
     }
   };
 
+  // Loading...
+  if (loading) {
+    return (
+      <div className="service-form-container centered-message">
+        <h2 className="service-form-title">Dogovor servisa vozila</h2>
+        <div className="loading-msg">Učitavanje...</div>
+      </div>
+    );
+  }
+
+  // Not logged in
+  if (!user) {
+    return (
+      <div className="service-form-container centered-message">
+        <h2 className="service-form-title">Dogovor servisa vozila</h2>
+        <div className="error-message">
+          Morate biti prijavljeni kako biste poslali zahtjev za servis.<br />
+          <Link to="/login" className="purchase-login-link">Prijavite se</Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Logged in
   return (
     <div className="service-form-container">
       <h2 className="service-form-title">Dogovor servisa vozila</h2>

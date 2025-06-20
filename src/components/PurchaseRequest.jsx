@@ -6,7 +6,7 @@ import '../styles/PurchaseRequest.css';
 
 const PurchaseRequest = () => {
   const { id: vehicleId } = useParams();
-  const { user } = useAuth();
+  const { user, loading } = useAuth(); // loading!
   const [vehicleTitle, setVehicleTitle] = useState('');
   const [contact, setContact] = useState('');
   const [note, setNote] = useState('');
@@ -26,21 +26,30 @@ const PurchaseRequest = () => {
     fetchTitle();
   }, [vehicleId]);
 
-  // Ako nije logiran – show warning
-  if (!user) {
+  // 1. Loading
+  if (loading) {
     return (
-      <div className="purchase-form-container">
+      <div className="purchase-form-container centered-message">
         <h2 className="purchase-form-title">Dogovori kupnju vozila</h2>
-        <div className="centered-message">
-          <span className="error-message">
-            Morate biti prijavljeni kako biste poslali zahtjev za kupnju.<br />
-            <Link to="/login" className="purchase-login-link">Prijava</Link>
-          </span>
-        </div>
+        <div className="loading-msg">Učitavanje...</div>
       </div>
     );
   }
 
+  // 2. Not logged in
+  if (!user) {
+    return (
+      <div className="purchase-form-container centered-message">
+        <h2 className="purchase-form-title">Dogovori kupnju vozila</h2>
+        <span className="error-message">
+          Morate biti prijavljeni kako biste poslali zahtjev za kupnju.<br />
+          <Link to="/login" className="purchase-login-link">Prijava</Link>
+        </span>
+      </div>
+    );
+  }
+
+  // 3. Forma za logiranog korisnika
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -90,7 +99,7 @@ const PurchaseRequest = () => {
             rows={5}
           />
         </label>
-        <button type="submit">Pošalji zahtjev</button>
+        <button type="submit" className="purchase-form-send-btn">Pošalji zahtjev</button>
         {success && <div className="success-message">{success}</div>}
         {error && <div className="error-message">{error}</div>}
       </form>

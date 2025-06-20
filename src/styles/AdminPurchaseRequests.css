@@ -22,7 +22,7 @@
   text-align: left;
 }
 .admin-requests-table th {
-  background: #fafafa;
+  background: #f2f9ff;
   font-weight: 600;
 }
 .admin-requests-table select {
@@ -39,5 +39,5 @@
   cursor: pointer;
 }
 .zavrsi-btn:hover {
-  background: #298d31;
+  background: #2077b3;
 }
