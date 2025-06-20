@@ -12,10 +12,10 @@ import VehiclesPage from './components/VehiclesPage';
 import VehicleDetails from './components/VehicleDetails';
 import PurchaseRequest from './components/PurchaseRequest';
 import AdminPurchaseRequests from './components/AdminPurchaseRequests';
-// NOVO: import servis komponenti!
 import ServiceRequest from './components/ServiceRequest';
 import MyServiceRequests from './components/MyServiceRequests';
 import AdminServiceRequests from './components/AdminServiceRequests';
+import About from './components/About';
 
 import './App.css';
 
@@ -61,6 +61,7 @@ function App() {
                     <Route path="/vozila" element={<VehiclesPage />} />
                     <Route path="/vozila/:id" element={<VehicleDetails />} />
                     <Route path="/kupnja/:id" element={<PurchaseRequest />} />
+                    <Route path="/about" element={<About />} />
 
                     {/* SERVIS RUTE */}
                     <Route path="/servis/novi" element={<ServiceRequest />} />
