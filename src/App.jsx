@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AdminRoute from './routes/AdminRoute';
 import AddVehicle from './components/AddVehicle';
+import EditVehicle from './components/EditVehicle'; // <--- DODANO
 import AudiPage from './components/AudiPage';
 import SeatPage from './components/SeatPage';
 import SkodaPage from './components/SkodaPage';
@@ -18,7 +19,6 @@ import ServiceRequest from './components/ServiceRequest';
 import MyServiceRequests from './components/MyServiceRequests';
 import AdminServiceRequests from './components/AdminServiceRequests';
 import About from './components/About';
-
 
 import './App.css';
 
@@ -39,6 +39,14 @@ function App() {
                                 element={
                                     <AdminRoute>
                                         <AddVehicle />
+                                    </AdminRoute>
+                                }
+                            />
+                            <Route
+                                path="/vozila/edit/:id"
+                                element={
+                                    <AdminRoute>
+                                        <EditVehicle />
                                     </AdminRoute>
                                 }
                             />
@@ -80,6 +88,5 @@ function App() {
         </AuthProvider>
     );
 }
-
 
 export default App;

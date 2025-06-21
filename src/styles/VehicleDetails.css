@@ -102,8 +102,10 @@
 .vehicle-purchase-btn-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 2.2rem;
   margin-bottom: 0.5rem;
+  gap: 1rem; /* Osigurava razmak između gumba */
 }
 .vehicle-purchase-btn {
   background: #222;
@@ -123,4 +125,28 @@
 .vehicle-purchase-btn:focus {
   background: #ffcc00;
   color: #000000;
+}
+
+/* --- EDIT BTN ZA ADMINA --- */
+.vehicle-edit-btn {
+  background: #212326;
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 1.1rem 2.7rem;
+  font-size: 1.07rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 0;
+  transition: background 0.18s, color 0.18s, border 0.15s;
+  border: 2px solid #fff2;
+  box-shadow: 0 2px 14px #0002;
+  display: inline-block;
+}
+.vehicle-edit-btn:hover,
+.vehicle-edit-btn:focus {
+  background: #f8fafb;
+  color: #181818;
+  border: 2px solid #181818;
 }

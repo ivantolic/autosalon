@@ -5,12 +5,18 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import '../styles/VehicleDetails.css';
 
+// KORISTI točnu putanju do AuthContexta po tvojoj strukturi!
+import { useAuth } from '../contexts/AuthContext';
+
 const VehicleDetails = () => {
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
   const [images, setImages] = useState([]);
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // KORISTIMO ROLE iz contexta!
+  const { role } = useAuth();
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -110,13 +116,24 @@ const VehicleDetails = () => {
           </ul>
         </div>
       )}
+
       <div className="vehicle-purchase-btn-wrapper">
         <Link
-            to={`/kupnja/${vehicle.id}`}
-            className="vehicle-purchase-btn"
+          to={`/kupnja/${vehicle.id}`}
+          className="vehicle-purchase-btn"
         >
-            Dogovorite kupnju ovog automobila
+          Dogovorite kupnju ovog automobila
         </Link>
+
+        {/* ADMIN - Prikazi "Uredi vozilo" gumb ako je role === 'admin' */}
+        {role === 'admin' && (
+          <Link
+            to={`/vozila/edit/${vehicle.id}`}
+            className="vehicle-edit-btn"
+          >
+            Uredi vozilo
+          </Link>
+        )}
       </div>
     </div>
   );
