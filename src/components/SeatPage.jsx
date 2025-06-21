@@ -28,11 +28,11 @@ const SeatPage = () => {
     <div>
       <div className="brand-hero-full">
         <img src={seatHero} alt="Seat hero" className="brand-hero-img-full" />
-        <div className="brand-hero-title-full">Seat</div>
+        <div className="brand-hero-title-full seat-title">SEAT</div>
       </div>
       <div className="brand-page-container">
         <div className="brand-models-section">
-          <h2>Seat modeli:</h2>
+          <h2 className="seat-title">SEAT modeli:</h2>
           <div className="brand-models-grid">
             {models.map((model, idx) => (
               <div
@@ -42,14 +42,14 @@ const SeatPage = () => {
                 tabIndex={0}
               >
                 <img src={model.image} alt={model.name} />
-                <span>{model.name}</span>
+                <span className="seat-model">{model.name}</span>
               </div>
             ))}
           </div>
         </div>
         <div className="brand-all-vehicles">
-          <button onClick={handleAllSeat} className="brand-all-btn">
-            Prikaži sva Seat vozila
+          <button onClick={handleAllSeat} className="brand-all-btn seat-title">
+            Prikaži sva SEAT vozila
           </button>
         </div>
       </div>

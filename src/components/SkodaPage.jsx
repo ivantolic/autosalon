@@ -36,10 +36,10 @@ const SkodaPage = () => {
     <div className="brand-page-container">
       <div className="brand-hero-full">
         <img src={skodaHero} alt="Škoda hero" className="brand-hero-img-full" />
-        <div className="brand-hero-title-full">Škoda</div>
+        <div className="brand-hero-title-full skoda-title">ŠKODA</div>
       </div>
       <div className="brand-models-section">
-        <h2>Škoda modeli:</h2>
+        <h2 className="skoda-title">ŠKODA modeli:</h2>
         <div className="brand-models-grid">
           {models.map((model, idx) => (
             <div
@@ -49,14 +49,14 @@ const SkodaPage = () => {
               tabIndex={0}
             >
               <img src={model.image} alt={model.name} />
-              <span>{model.name}</span>
+              <span className="skoda-model">{model.name}</span>
             </div>
           ))}
         </div>
       </div>
       <div className="brand-all-vehicles">
-        <button onClick={handleAllSkoda} className="brand-all-btn">
-          Prikaži sva Škoda vozila
+        <button onClick={handleAllSkoda} className="brand-all-btn skoda-title">
+          Prikaži sva ŠKODA vozila
         </button>
       </div>
     </div>

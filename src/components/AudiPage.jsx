@@ -33,7 +33,6 @@ const AudiPage = () => {
   const navigate = useNavigate();
 
   const handleModelClick = (model) => {
-    // model u query param, mala slova radi konzistentnosti
     navigate(`/vozila?brand=audi&model=${model.toLowerCase()}`);
   };
 
@@ -45,10 +44,10 @@ const AudiPage = () => {
     <div className="brand-page-container">
       <div className="brand-hero-full">
         <img src={audiHero} alt="Audi hero" className="brand-hero-img-full" />
-        <div className="brand-hero-title-full">Audi</div>
+        <div className="brand-hero-title-full audi-title">Audi</div>
       </div>
       <div className="brand-models-section">
-        <h2>Audi modeli:</h2>
+        <h2 className="audi-title">Audi modeli:</h2>
         <div className="brand-models-grid">
           {models.map((model, idx) => (
             <div
@@ -58,13 +57,13 @@ const AudiPage = () => {
               tabIndex={0}
             >
               <img src={model.image} alt={model.name} />
-              <span>{model.name}</span>
+              <span className="audi-model">{model.name}</span>
             </div>
           ))}
         </div>
       </div>
       <div className="brand-all-vehicles">
-        <button onClick={handleAllAudi} className="brand-all-btn">
+        <button onClick={handleAllAudi} className="brand-all-btn audi-title">
           Prikaži sva Audi vozila
         </button>
       </div>
