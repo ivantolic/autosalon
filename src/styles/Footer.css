@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+.main-footer {
+  background: #111;
+  color: #f8f8f8;
+  padding: 1.7rem 0 1.1rem 0;
+  font-size: 1.06rem;
+  letter-spacing: 0.01em;
+}
+
+.footer-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2.6rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.footer-logo {
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: 2.2px;
+  color: #fff;
+  font-family: 'Alfa Slab One', cursive, sans-serif;
+}
+
+.footer-copyright {
+  font-size: 1.02rem;
+  color: #cccccc;
+  font-weight: 400;
+}
+
+.footer-links-wrapper {
+  display: flex;
+  gap: 2.6rem;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+  min-width: 120px;
+}
+
+.footer-links-col a {
+  color: #f8f8f8;
+  text-decoration: none;
+  transition: color 0.15s;
+  font-weight: 600;
+  font-size: 1.08rem;
+}
+
+.footer-links-col a:hover,
+.footer-links-col a:focus {
+  color: #ffcc00;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.footer-contact-mail,
+.footer-contact-phone {
+  display: block;
+  font-size: 1.15rem;
+  color: #f7f7f7;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.footer-contact-address {
+  display: block;
+  font-size: 1.05rem;
+  color: #cccccc;
+  font-weight: 500;
+  margin-top: 0.17rem;
+}
+
+@media (max-width: 950px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .footer-brand, .footer-contact {
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links-wrapper {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+}
