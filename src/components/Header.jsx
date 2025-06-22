@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/Header.css';
@@ -8,6 +8,13 @@ const brands = ['Audi', 'Seat', 'Škoda'];
 const Header = () => {
   const { user, role, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // Logout + redirect na /
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className='header'>
@@ -69,7 +76,7 @@ const Header = () => {
         {user ? (
           <>
             <span className='user-info'>{user.email} ({role})</span>
-            <button onClick={signOut}>Odjava</button>
+            <button onClick={handleLogout}>Odjava</button>
           </>
         ) : (
           <>
@@ -108,7 +115,14 @@ const Header = () => {
             {user ? (
               <>
                 <span>{user.email} ({role})</span>
-                <button onClick={() => { signOut(); setMenuOpen(false); }}>Odjava</button>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                >
+                  Odjava
+                </button>
               </>
             ) : (
               <>

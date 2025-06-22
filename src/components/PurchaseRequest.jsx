@@ -4,12 +4,17 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../supabaseClient';
 import '../styles/PurchaseRequest.css';
 
+const initialState = {
+  surname: '',
+  contact: '',
+  note: '',
+};
+
 const PurchaseRequest = () => {
   const { id: vehicleId } = useParams();
-  const { user, loading } = useAuth(); // loading!
+  const { user, loading } = useAuth();
   const [vehicleTitle, setVehicleTitle] = useState('');
-  const [contact, setContact] = useState('');
-  const [note, setNote] = useState('');
+  const [form, setForm] = useState(initialState);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -26,7 +31,6 @@ const PurchaseRequest = () => {
     fetchTitle();
   }, [vehicleId]);
 
-  // 1. Loading
   if (loading) {
     return (
       <div className="purchase-form-container centered-message">
@@ -36,7 +40,6 @@ const PurchaseRequest = () => {
     );
   }
 
-  // 2. Not logged in
   if (!user) {
     return (
       <div className="purchase-form-container centered-message">
@@ -49,25 +52,34 @@ const PurchaseRequest = () => {
     );
   }
 
-  // 3. Forma za logiranog korisnika
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (!contact) {
+    if (!form.surname) {
+      setError('Prezime je obavezno.');
+      return;
+    }
+    if (!form.contact) {
       setError('Kontakt podatak je obavezan.');
       return;
     }
     const { error } = await supabase.from('purchase_requests').insert({
       vehicle_id: vehicleId,
       user_id: user?.id ?? null,
-      contact_info: contact,
-      note,
+      surname: form.surname,
+      contact_info: form.contact,
+      note: form.note,
     });
     if (error) {
       setError('Greška pri slanju zahtjeva.');
     } else {
       setSuccess('Zahtjev za kupnju je poslan! Kontaktirat ćemo vas uskoro.');
+      setForm(initialState);
       setTimeout(() => navigate('/vozila'), 2000);
     }
   };
@@ -82,19 +94,31 @@ const PurchaseRequest = () => {
       )}
       <form onSubmit={handleSubmit}>
         <label>
+          Prezime:
+          <input
+            type="text"
+            name="surname"
+            value={form.surname}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
           Kontakt broj telefona:
           <input
             type="text"
-            value={contact}
-            onChange={e => setContact(e.target.value)}
+            name="contact"
+            value={form.contact}
+            onChange={handleChange}
             required
           />
         </label>
         <label>
           Poruka (opcionalno):
           <textarea
-            value={note}
-            onChange={e => setNote(e.target.value)}
+            name="note"
+            value={form.note}
+            onChange={handleChange}
             placeholder="Npr. željeni termin za kontakt, dodatne napomene..."
             rows={5}
           />

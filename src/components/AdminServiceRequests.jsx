@@ -49,6 +49,7 @@ const AdminServiceRequests = () => {
         <thead>
           <tr>
             <th>Korisnik ID</th>
+            <th>Prezime</th>
             <th>Marka</th>
             <th>Model</th>
             <th>Godina</th>
@@ -67,6 +68,7 @@ const AdminServiceRequests = () => {
             requests.map(req => (
               <tr key={req.id}>
                 <td>{req.user_id}</td>
+                <td>{req.surname || '-'}</td>
                 <td>{req.brand}</td>
                 <td>{req.model}</td>
                 <td>{req.year}</td>

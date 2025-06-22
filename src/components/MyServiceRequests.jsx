@@ -34,7 +34,7 @@ const MyServiceRequests = () => {
 
   if (!user) {
     return (
-      <div className="my-service-requests centered-container">
+      <div className="my-service-requests-container">
         <h2 className="my-service-requests-title">Moji zahtjevi za servis</h2>
         <div className="centered-message">
           <span className="error-message">
@@ -49,7 +49,7 @@ const MyServiceRequests = () => {
   if (loading) return <div className="my-service-requests-loading">Učitavanje...</div>;
 
   return (
-    <div className="my-service-requests">
+    <div className="my-service-requests-container">
       <h2 className="my-service-requests-title">Moji zahtjevi za servis</h2>
       <table className="my-service-requests-table">
         <thead>

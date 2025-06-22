@@ -19,7 +19,7 @@ const AdminPurchaseRequests = () => {
       const { data, error } = await supabase
         .from('purchase_requests')
         .select(`
-          id, created_at, contact_info, note, status, user_id,
+          id, created_at, contact_info, note, status, user_id, surname,
           vehicles(title)
         `)
         .order('created_at', { ascending: false });
@@ -30,13 +30,11 @@ const AdminPurchaseRequests = () => {
     fetchRequests();
   }, []);
 
-  // Promjena statusa (iz selecta)
   const handleStatusChange = async (id, newStatus) => {
     await supabase.from('purchase_requests').update({ status: newStatus }).eq('id', id);
     setRequests(reqs => reqs.map(r => r.id === id ? { ...r, status: newStatus } : r));
   };
 
-  // Brisanje
   const handleDelete = async (id) => {
     if (window.confirm('Jeste li sigurni da želite obrisati ovaj zahtjev?')) {
       await supabase.from('purchase_requests').delete().eq('id', id);
@@ -44,14 +42,14 @@ const AdminPurchaseRequests = () => {
     }
   };
 
-  if (loading) return <div style={{ textAlign: 'center' }}>Učitavanje...</div>;
+  if (loading) return <div className="admin-requests-loading">Učitavanje...</div>;
 
   const openRequests = requests.filter(r => r.status !== 'completed');
   const completedRequests = requests.filter(r => r.status === 'completed');
 
   return (
     <div className="admin-requests-container">
-      <h2>Zahtjevi za kupnju vozila</h2>
+      <h2 className="admin-requests-title">Zahtjevi za kupnju vozila</h2>
 
       {/* OTVORENI */}
       <table className="admin-requests-table">
@@ -59,6 +57,7 @@ const AdminPurchaseRequests = () => {
           <tr>
             <th>Vozilo</th>
             <th>Korisnik ID</th>
+            <th>Prezime</th>
             <th>Kontakt</th>
             <th>Napomena</th>
             <th>Status</th>
@@ -67,12 +66,13 @@ const AdminPurchaseRequests = () => {
         </thead>
         <tbody>
           {openRequests.length === 0 ? (
-            <tr><td colSpan={6}>Nema otvorenih zahtjeva.</td></tr>
+            <tr><td colSpan={7}>Nema otvorenih zahtjeva.</td></tr>
           ) : (
             openRequests.map(req => (
               <tr key={req.id}>
                 <td>{req.vehicles?.title || '-'}</td>
                 <td>{req.user_id || '-'}</td>
+                <td>{req.surname || '-'}</td>
                 <td>{req.contact_info}</td>
                 <td>{req.note || '-'}</td>
                 <td>
@@ -94,12 +94,13 @@ const AdminPurchaseRequests = () => {
       </table>
 
       {/* ZAVRŠENI */}
-      <h2 style={{ marginTop: '2.5rem', color: '#298d31', fontSize: '1.3rem' }}>Završeni zahtjevi</h2>
+      <h2 className="admin-requests-title done-title">Završeni zahtjevi</h2>
       <table className="admin-requests-table">
         <thead>
           <tr>
             <th>Vozilo</th>
             <th>Korisnik ID</th>
+            <th>Prezime</th>
             <th>Kontakt</th>
             <th>Napomena</th>
             <th>Status</th>
@@ -109,12 +110,13 @@ const AdminPurchaseRequests = () => {
         </thead>
         <tbody>
           {completedRequests.length === 0 ? (
-            <tr><td colSpan={7}>Nema završenih zahtjeva.</td></tr>
+            <tr><td colSpan={8}>Nema završenih zahtjeva.</td></tr>
           ) : (
             completedRequests.map(req => (
               <tr key={req.id}>
                 <td>{req.vehicles?.title || '-'}</td>
                 <td>{req.user_id || '-'}</td>
+                <td>{req.surname || '-'}</td>
                 <td>{req.contact_info}</td>
                 <td>{req.note || '-'}</td>
                 <td>{statusLabels[req.status] || '-'}</td>

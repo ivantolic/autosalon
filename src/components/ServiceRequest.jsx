@@ -12,6 +12,7 @@ const initialState = {
   year: '',
   registration: '',
   contact: '',
+  surname: '',
   description: '',
 };
 
@@ -45,6 +46,7 @@ const ServiceRequest = () => {
       year: form.year,
       registration: form.registration,
       contact_info: form.contact,
+      surname: form.surname,
       description: form.description,
       status: 'pending',
     });
@@ -104,6 +106,10 @@ const ServiceRequest = () => {
         <label>
           Registracija:
           <input type="text" name="registration" value={form.registration} onChange={handleChange} required />
+        </label>
+        <label>
+          Prezime: {/* NOVO: polje za prezime */}
+          <input type="text" name="surname" value={form.surname} onChange={handleChange} required />
         </label>
         <label>
           Kontakt (telefon/mail):
