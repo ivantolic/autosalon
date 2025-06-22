@@ -81,7 +81,7 @@ const Home = () => {
             <h2>Ovlašteni servis</h2>
             <p>
               Jednostavno i brzo dogovorite svoj termin servisa online.<br />
-              Naši ovlašteni serviseri brinu za vaš Audi, Škoda ili Seat.
+              Naši ovlašteni serviseri brinu za vaš Audi, Seat ili Škodu.
             </p>
             <Link to="/servis/novi" className="feature-banner-btn">Rezerviraj servis</Link>
           </div>
@@ -104,13 +104,13 @@ const Home = () => {
           <div className="feature-banner-content">
             <h2>Ovlašteni prodavač i serviser</h2>
             <p>
-              BRMBRM je ovlašteni prodavač i serviser za <b>Audi</b>, <b>Škoda</b> i <b>Seat</b>.<br />
+              BRMBRM je ovlašteni prodavač i serviser za <b>Audi</b>, <b>Seat</b> i <b>Škoda</b> vozila.<br />
               Povjerite svoje vozilo stručnjacima!
             </p>
             <div className="feature-brands">
               <img src={audiLogo} alt="Audi" />
-              <img src={skodaLogo} alt="Škoda" />
               <img src={seatLogo} alt="Seat" />
+              <img src={skodaLogo} alt="Škoda" />
             </div>
           </div>
         </div>

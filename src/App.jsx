@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AdminRoute from './routes/AdminRoute';
 import AddVehicle from './components/AddVehicle';
-import EditVehicle from './components/EditVehicle'; // <--- DODANO
+import EditVehicle from './components/EditVehicle';
 import AudiPage from './components/AudiPage';
 import SeatPage from './components/SeatPage';
 import SkodaPage from './components/SkodaPage';
@@ -19,6 +19,7 @@ import ServiceRequest from './components/ServiceRequest';
 import MyServiceRequests from './components/MyServiceRequests';
 import AdminServiceRequests from './components/AdminServiceRequests';
 import About from './components/About';
+import FavoritesPage from './components/FavoritesPage';
 
 import './App.css';
 
@@ -76,6 +77,7 @@ function App() {
                             <Route path="/vozila/:id" element={<VehicleDetails />} />
                             <Route path="/kupnja/:id" element={<PurchaseRequest />} />
                             <Route path="/about" element={<About />} />
+                            <Route path="/favorites" element={<FavoritesPage />} />
 
                             {/* SERVIS RUTE */}
                             <Route path="/servis/novi" element={<ServiceRequest />} />

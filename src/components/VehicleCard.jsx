@@ -1,7 +1,8 @@
 import { supabase } from '../supabaseClient';
+import FavoriteButton from './FavoriteButton';
 import '../styles/VehicleCard.css';
 
-const VehicleCard = ({ vehicle, isAdmin, onDelete }) => {
+const VehicleCard = ({ vehicle, isAdmin, onDelete, onUnfavorite, isFavoritePage }) => {
   const handleDelete = async () => {
     const confirmed = window.confirm('Želite li stvarno obrisati ovo vozilo? Ova radnja je nepovratna!');
     if (!confirmed) return;
@@ -22,12 +23,22 @@ const VehicleCard = ({ vehicle, isAdmin, onDelete }) => {
 
   return (
     <div className="vehicle-card">
-      <img
-        src={vehicle.image_url || '/no-image.png'}
-        alt={vehicle.title}
-        className="vehicle-card-img"
-        loading="lazy"
-      />
+      <div className="vehicle-card-img-wrapper">
+        {/* Zvjezdica NA slici, gore desno */}
+        <div className="vehicle-fav-imgcorner">
+          <FavoriteButton
+            vehicleId={vehicle.id}
+            size="1.22rem"
+            onUnfavorite={isFavoritePage ? onUnfavorite : undefined}
+          />
+        </div>
+        <img
+          src={vehicle.image_url || '/no-image.png'}
+          alt={vehicle.title}
+          className="vehicle-card-img"
+          loading="lazy"
+        />
+      </div>
       <div className="vehicle-card-info">
         <h3>{vehicle.title}</h3>
         <div className="vehicle-card-specs-2col">

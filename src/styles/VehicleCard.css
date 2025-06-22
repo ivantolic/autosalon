@@ -52,25 +52,7 @@
   width: 100%;
 }
 
-/* Responsive za 1 stupac na mobitelu */
-@media (max-width: 900px) {
-  .vehicles-page-flex {
-    flex-direction: column;
-    gap: 1.3rem;
-  }
-  .vehicles-filter-sidebar {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    margin-bottom: 0.7rem;
-    padding: 1.2rem 0.6rem 1.2rem 0.6rem;
-  }
-  .vehicles-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* === VEHICLE CARD STYLES (copy/paste ili koristi kao zaseban file) === */
+/* === VEHICLE CARD === */
 .vehicle-card {
   width: 100%;
   min-height: 420px;
@@ -83,19 +65,43 @@
   transition: box-shadow 0.22s;
   margin-bottom: 0;
   min-width: 0;
+  position: relative;
 }
 
 .vehicle-card:hover {
   box-shadow: 0 8px 32px #0003;
 }
 
+.vehicle-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #eee;
+  overflow: hidden;
+}
+
 .vehicle-card-img {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  display: block;
   background: #eee;
 }
 
+/* === FAVORITE STAR WRAPPER ONLY! === */
+.vehicle-fav-imgcorner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+}
+.vehicle-fav-imgcorner:hover,
+.vehicle-fav-imgcorner:focus-within {
+  /* efekt hovera na zvjezdicu, možeš ostaviti ili maknuti */
+  box-shadow: 0 4px 20px #ffc60070;
+}
+
+/* === INFO === */
 .vehicle-card-info {
   flex: 1 1 auto;
   display: flex;
@@ -197,6 +203,23 @@
   gap: 0;
 }
 
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .vehicles-page-flex {
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+  .vehicles-filter-sidebar {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-bottom: 0.7rem;
+    padding: 1.2rem 0.6rem 1.2rem 0.6rem;
+  }
+  .vehicles-list {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 600px) {
   .vehicles-list {
     grid-template-columns: 1fr;
@@ -209,5 +232,9 @@
   }
   .vehicle-card-specs-2col span {
     font-size: 0.97rem;
+  }
+  .vehicle-fav-imgcorner {
+    top: 8px;
+    right: 8px;
   }
 }
