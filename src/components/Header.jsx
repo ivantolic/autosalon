@@ -91,15 +91,14 @@ const Header = () => {
           <button className='close-btn' onClick={() => setMenuOpen(false)}>×</button>
           <nav>
             <Link to='/' onClick={() => setMenuOpen(false)}>Početna</Link>
-            <span>Naši Brandovi</span>
             {brands.map((brand) => (
               <Link key={brand} to={`/brands/${brand.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{brand}</Link>
             ))}
-            <Link to='/vehicles?category=new' onClick={() => setMenuOpen(false)}>Nova vozila</Link>
-            <Link to='/vehicles?category=used' onClick={() => setMenuOpen(false)}>Rabljena vozila</Link>
-            <Link to='/vehicles?category=luxury' onClick={() => setMenuOpen(false)}>Luksuzna vozila</Link>
-            <Link to='/service-requests' onClick={() => setMenuOpen(false)}>Dogovor servisa</Link>
-            <Link to='/purchase-requests' onClick={() => setMenuOpen(false)}>Dogovor kupnje</Link>
+            <Link to='/vozila?category=new' onClick={() => setMenuOpen(false)}>Nova vozila</Link>
+            <Link to='/vozila?category=used' onClick={() => setMenuOpen(false)}>Rabljena vozila</Link>
+            <Link to='/vozila?category=luxury' onClick={() => setMenuOpen(false)}>Luksuzna vozila</Link>
+            <Link to='/servis/novi' onClick={() => setMenuOpen(false)}>Dogovor servisa</Link>
+            <Link to='/vozila' onClick={() => setMenuOpen(false)}>Dogovor kupnje</Link>
             <Link to='/about' onClick={() => setMenuOpen(false)}>O nama</Link>
             <Link to='/favorites' onClick={() => setMenuOpen(false)}>Favoriti</Link>
 

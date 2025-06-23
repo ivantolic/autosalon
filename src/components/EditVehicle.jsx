@@ -125,7 +125,7 @@ const EditVehicle = () => {
       return;
     }
 
-    // Dodatna oprema: obriši sve stare, upiši nove
+    // Dodatna oprema: obrisi sve stare, upisi nove
     await supabase.from("vehicle_features").delete().eq("vehicle_id", id);
     if (featureList.length > 0) {
       const featuresToInsert = featureList.map(f => ({

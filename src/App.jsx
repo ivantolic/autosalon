@@ -34,7 +34,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
 
-                            {/* ADMIN SAMO */}
+                            {/* ADMIN */}
                             <Route
                                 path="/admin/add-vehicle"
                                 element={
@@ -68,7 +68,7 @@ function App() {
                                 }
                             />
 
-                            {/* SVI OSTALI */}
+                            {/* OSTALE RUTE */}
                             <Route path="/" element={<Home />} />
                             <Route path="/brands/audi" element={<AudiPage />} />
                             <Route path="/brands/seat" element={<SeatPage />} />
