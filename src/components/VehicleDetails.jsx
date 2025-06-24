@@ -5,7 +5,6 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import '../styles/VehicleDetails.css';
 
-// KORISTI točnu putanju do AuthContexta po tvojoj strukturi!
 import { useAuth } from '../contexts/AuthContext';
 
 const VehicleDetails = () => {
@@ -15,7 +14,7 @@ const VehicleDetails = () => {
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // KORISTIMO ROLE iz contexta!
+  // Role iz contexta
   const { role } = useAuth();
 
   useEffect(() => {
@@ -125,7 +124,7 @@ const VehicleDetails = () => {
           Dogovorite kupnju ovog automobila
         </Link>
 
-        {/* ADMIN - Prikazi "Uredi vozilo" gumb ako je role === 'admin' */}
+        {/* Prikazi gumb ako je role === 'admin' */}
         {role === 'admin' && (
           <Link
             to={`/vozila/edit/${vehicle.id}`}

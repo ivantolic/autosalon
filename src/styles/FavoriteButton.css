@@ -51,16 +51,15 @@
   text-shadow: 0 2px 8px #ffec80b0;
 }
 
-/* Not logged in: zabranjeno kursor i sivo */
+/* Nije logiran: zabranjeno */
 .favorite-btn.favorite-btn-disabled,
 .favorite-btn:disabled {
   cursor: not-allowed !important;
   opacity: 0.65;
-  color: #e95151 !important; /* crvenkasta/neutralna za zabranjeno */
+  color: #e95151 !important;
   transform: none;
 }
 
-/* MOBILE */
 @media (max-width: 600px) {
   .favorite-btn-wrapper {
     top: 8px;

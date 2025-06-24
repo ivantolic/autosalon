@@ -1,5 +1,5 @@
 import React from "react";
-import heroAbout from "../assets/about/heroabout.jpg"; // prilagodi putanju ako treba
+import heroAbout from "../assets/about/heroabout.jpg";
 import "../styles/About.css";
 
 const About = () => {

@@ -21,7 +21,6 @@ const Login = () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
 
         if (error) {
-            // Check if the error is about email confirmation
             if (
                 error.message.toLowerCase().includes('confirm') ||
                 error.message.toLowerCase().includes('verify')
@@ -31,7 +30,7 @@ const Login = () => {
                 setError(error.message);
             }
         } else {
-            navigate('/'); // If login successful, redirect to homepage
+            navigate('/');
         }
     };
 

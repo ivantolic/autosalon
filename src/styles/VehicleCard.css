@@ -52,7 +52,6 @@
   width: 100%;
 }
 
-/* === VEHICLE CARD === */
 .vehicle-card {
   width: 100%;
   min-height: 420px;
@@ -88,7 +87,6 @@
   background: #eee;
 }
 
-/* === FAVORITE STAR WRAPPER ONLY! === */
 .vehicle-fav-imgcorner {
   position: absolute;
   top: 8px;
@@ -97,11 +95,9 @@
 }
 .vehicle-fav-imgcorner:hover,
 .vehicle-fav-imgcorner:focus-within {
-  /* efekt hovera na zvjezdicu, možeš ostaviti ili maknuti */
   box-shadow: 0 4px 20px #ffc60070;
 }
 
-/* === INFO === */
 .vehicle-card-info {
   flex: 1 1 auto;
   display: flex;
@@ -203,7 +199,6 @@
   gap: 0;
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 900px) {
   .vehicles-page-flex {
     flex-direction: column;

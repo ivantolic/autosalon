@@ -28,7 +28,6 @@
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* --- NOVO: grid za detalje + kartice --- */
 .vehicle-details-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -66,7 +65,6 @@
   font-size: 1.22rem;
 }
 
-/* --- Responsive za mobitel --- */
 @media (max-width: 600px) {
   .vehicle-details-grid {
     grid-template-columns: 1fr;
@@ -78,7 +76,6 @@
   }
 }
 
-/* Oprema */
 .vehicle-features {
   max-width: 800px;
   margin: 2rem auto;
@@ -105,7 +102,7 @@
   align-items: center;
   margin-top: 2.2rem;
   margin-bottom: 0.5rem;
-  gap: 1rem; /* Osigurava razmak između gumba */
+  gap: 1rem;
 }
 .vehicle-purchase-btn {
   background: #222;
@@ -127,7 +124,6 @@
   color: #000000;
 }
 
-/* --- EDIT BTN ZA ADMINA --- */
 .vehicle-edit-btn {
   background: #212326;
   color: #fff;

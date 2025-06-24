@@ -68,7 +68,7 @@ const ServiceRequest = () => {
     );
   }
 
-  // Not logged in
+  // Ako nije logiran
   if (!user) {
     return (
       <div className="service-form-container centered-message">
@@ -81,7 +81,7 @@ const ServiceRequest = () => {
     );
   }
 
-  // Logged in
+  // Ako je logiran
   return (
     <div className="service-form-container">
       <h2 className="service-form-title">Dogovor servisa vozila</h2>

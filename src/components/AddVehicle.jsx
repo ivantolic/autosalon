@@ -17,7 +17,6 @@ const AddVehicle = () => {
   const [useNewBrand, setUseNewBrand] = useState(false);
   const [useNewModel, setUseNewModel] = useState(false);
 
-  // Dodaj state za dodatnu opremu (featurese)
   const [featureInput, setFeatureInput] = useState('');
   const [featureList, setFeatureList] = useState([]);
 
@@ -421,7 +420,7 @@ const AddVehicle = () => {
     <div className="add-vehicle-container">
       <h2>Dodaj vozilo</h2>
       <form onSubmit={handleSubmit} noValidate>
-        {/* --- Marka i model --- */}
+        {/* Marka i model */}
         <fieldset className="form-section">
           <legend>Marka i model vozila</legend>
           <div className="form-row">
@@ -557,7 +556,7 @@ const AddVehicle = () => {
           )}
         </fieldset>
 
-        {/* --- Osnovni podaci --- */}
+        {/* Osnovni podaci */}
         <fieldset className="form-section">
           <legend>Osnovni podaci</legend>
           <div className="form-row">
@@ -634,7 +633,7 @@ const AddVehicle = () => {
           </div>
         </fieldset>
 
-        {/* --- Tehničke karakteristike --- */}
+        {/* Tehnicke karakteristike */}
         <fieldset className="form-section">
           <legend>Tehničke karakteristike</legend>
           <div className="form-row">
@@ -705,7 +704,7 @@ const AddVehicle = () => {
           </div>
         </fieldset>
 
-        {/* --- Dodatna oprema --- */}
+        {/* Dodatna oprema */}
         <fieldset className="form-section">
           <legend>Dodatna oprema</legend>
           <div className="feature-section">
@@ -744,7 +743,7 @@ const AddVehicle = () => {
         </fieldset>
 
 
-        {/* --- Slike --- */}
+        {/* Slike */}
         <fieldset className="form-section">
           <legend>Slike</legend>
           <div className="file-input-row">

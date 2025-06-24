@@ -62,7 +62,6 @@
   justify-content: center;
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .vehicles-page-flex {
     flex-direction: column;
@@ -77,7 +76,6 @@
   }
 }
 
-/* === HOVER ZA GUMB DETALJI === */
 .vehicle-card-link {
   background: #222;
   color: #fff;

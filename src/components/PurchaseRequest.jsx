@@ -70,7 +70,7 @@ const PurchaseRequest = () => {
     }
     const { error } = await supabase.from('purchase_requests').insert({
       vehicle_id: vehicleId,
-      user_id: user?.id ?? null,
+      user_id: user?.id ?? null, // Optional chaning
       surname: form.surname,
       contact_info: form.contact,
       note: form.note,

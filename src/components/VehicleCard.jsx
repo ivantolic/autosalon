@@ -24,7 +24,7 @@ const VehicleCard = ({ vehicle, isAdmin, onDelete, onUnfavorite, isFavoritePage 
   return (
     <div className="vehicle-card">
       <div className="vehicle-card-img-wrapper">
-        {/* Zvjezdica NA slici, gore desno */}
+        {/* Zvjezdica na slici, gore desno */}
         <div className="vehicle-fav-imgcorner">
           <FavoriteButton
             vehicleId={vehicle.id}

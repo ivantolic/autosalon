@@ -28,7 +28,7 @@ const VehiclesPage = () => {
   const navigate = useNavigate();
   const { role } = useAuth();
 
-  // 1. Fetch all filter options on mount
+  // 1. Fetchaj sve filtere opcije na mount
   useEffect(() => {
     let isMounted = true;
     Promise.all([
@@ -49,7 +49,7 @@ const VehiclesPage = () => {
     return () => { isMounted = false; };
   }, []);
 
-  // 2. Svaki put kad se URL ili brands/models promijeni, POSTAVI FILTER IZ QUERY-a (i resetiraj ostalo)
+  // Svaki put kad se URL ili brands/models promijeni, postavi filter iz querya (i resetiraj ostalo)
   useEffect(() => {
     if (!brands.length || !models.length) return;
     const params = new URLSearchParams(location.search);
@@ -95,12 +95,12 @@ const VehiclesPage = () => {
     if (priceMin) newFilters.priceMin = priceMin;
     if (priceMax) newFilters.priceMax = priceMax;
 
-    // RESETIRAJ sve filtere na osnovu query-a (ne mergea sa starim!)
+    // Resetiraj sve filtere na osnovu query-a (ne mergea sa starim)
     setFilters(newFilters);
     setFiltersReady(true);
   }, [location.search, brands, models]);
 
-  // 3. Fetch vehicles by filters (kad su filteri spremni)
+  // 3. Fetchaj vozila po filterima (kad su filteri spremni)
   useEffect(() => {
     if (!filtersReady) return;
     setLoading(true);
@@ -139,7 +139,7 @@ const VehiclesPage = () => {
     });
   }, [filters, models, filtersReady]);
 
-  // 4. Promjena filtera - update i URL
+  //  Promjena filtera - update i URL
   const handleFilterChange = updated => {
     setFilters(updated);
 
@@ -174,7 +174,7 @@ const VehiclesPage = () => {
     navigate({ search: params.toString() }, { replace: true });
   };
 
-  // 5. Sort
+  // Sort
   function sortVehicles(list) {
     const v = [...list];
     switch (sortBy) {
