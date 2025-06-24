@@ -36,7 +36,7 @@ const carouselData = [
 ];
 
 const Home = () => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0); // "Slide index"
   const navigate = useNavigate();
 
   // Carousel funkcije
@@ -74,7 +74,6 @@ const Home = () => {
       </div>
 
       <div className="home-feature-banners">
-        {/* SERVIS BLOK */}
         <div className="feature-banner" style={{ backgroundImage: `url(${servisImg})` }}>
           <div className="feature-banner-overlay" />
           <div className="feature-banner-content">

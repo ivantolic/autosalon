@@ -143,7 +143,7 @@ const AddVehicle = () => {
   const handleRemoveFeature = (idx) => {
     setFeatureList(prev => prev.filter((_, i) => i !== idx));
   };
-
+  // Promjena inputa i validacija 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
@@ -175,7 +175,7 @@ const AddVehicle = () => {
       }));
     }
   };
-
+  // Brisanje slika
   const handleRemoveCoverImage = () => {
     setCoverImage(null);
     setCoverPreview(null);
@@ -191,7 +191,7 @@ const AddVehicle = () => {
       return updated;
     });
   };
-
+  
   const validateBeforeSubmit = () => {
     if (errors.price || errors.mileage || errors.year || errors.doors) return false;
     if (Number(form.price) <= 0) return false;
@@ -368,7 +368,7 @@ const AddVehicle = () => {
       }
     }
 
-    // SPREMANJE DODATNE OPREME
+    // Spremanje dodatne opreme
     if (featureList.length > 0) {
       const featuresToInsert = featureList.map(f => ({
         vehicle_id: vehicleId,
@@ -383,7 +383,7 @@ const AddVehicle = () => {
         return;
       }
     }
-
+    // Reset svega i poruka uspjeha
     setSuccess('Vozilo uspješno dodano!');
     setForm({
       title: '',

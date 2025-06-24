@@ -11,6 +11,7 @@ const FavoriteButton = ({
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Je li auto favorit
   useEffect(() => {
     if (!user) {
       setIsFavorite(false);
@@ -29,7 +30,8 @@ const FavoriteButton = ({
     checkFavorite();
     return () => { ignore = true };
   }, [user, vehicleId]);
-
+  
+  // Dodavanje brisanje favorita
   const toggleFavorite = async () => {
     if (!user || loading) return;
     setLoading(true);

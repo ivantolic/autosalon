@@ -25,7 +25,7 @@ const Login = () => {
                 error.message.toLowerCase().includes('confirm') ||
                 error.message.toLowerCase().includes('verify')
             ) {
-                setError('Please confirm your email address before logging in. Check your inbox for the confirmation link.');
+                setError('Molimo vas potvrdite vašu e-mail adresu.');
             } else {
                 setError(error.message);
             }
@@ -55,8 +55,8 @@ const Login = () => {
                 <button>Log in</button>
             </form>
             <p>
-                Don't have an account?{' '}
-                <Link to='/register'>Register</Link>
+                Nemate račun?{' '}
+                <Link to='/register'>Registrirajte se</Link>
             </p>
             {error && <p className="error-message">{error}</p>}
         </div>

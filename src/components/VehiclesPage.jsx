@@ -28,7 +28,7 @@ const VehiclesPage = () => {
   const navigate = useNavigate();
   const { role } = useAuth();
 
-  // 1. Fetchaj sve filtere opcije na mount
+  //  Fetchaj sve filtere opcije na mount
   useEffect(() => {
     let isMounted = true;
     Promise.all([
@@ -41,8 +41,8 @@ const VehiclesPage = () => {
       setBrands(brandsRes.data || []);
       setModels(modelsRes.data || []);
       setVariants(variantsRes.data || []);
-      const uniqueCategories = Array.from(
-        new Set((categoriesRes.data || []).map(v => v.category).filter(Boolean))
+      const uniqueCategories = Array.from( // U obicno polje
+        new Set((categoriesRes.data || []).map(v => v.category).filter(Boolean)) // Izbacuje duplikate
       );
       setCategories(uniqueCategories);
     });
@@ -100,7 +100,7 @@ const VehiclesPage = () => {
     setFiltersReady(true);
   }, [location.search, brands, models]);
 
-  // 3. Fetchaj vozila po filterima (kad su filteri spremni)
+  //  Fetchaj vozila po filterima (kad su filteri spremni)
   useEffect(() => {
     if (!filtersReady) return;
     setLoading(true);
