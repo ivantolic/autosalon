@@ -277,6 +277,15 @@
   color: #fff !important;
 }
 
+.file-count {
+  margin-left: 1rem;
+  font-weight: 500;
+  color: #222;
+  font-size: 1rem;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
 @media (max-width: 600px) {
   .add-vehicle-container {
     padding: 0.5rem 0.5rem;

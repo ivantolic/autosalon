@@ -100,6 +100,11 @@ const VehicleDetails = () => {
           <span className="vehicle-detail-value">{vehicle.color}</span>
         </div>
         <div className="vehicle-detail-card">
+          <span className="vehicle-detail-label">Broj vrata:</span>
+          <span className="vehicle-detail-value">{vehicle.doors}</span>
+        </div>
+
+        <div className="vehicle-detail-card">
           <span className="vehicle-detail-label">Cijena:</span>
           <span className="vehicle-detail-value vehicle-details-price">{vehicle.price} €</span>
         </div>

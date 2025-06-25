@@ -20,6 +20,8 @@ import MyServiceRequests from './components/MyServiceRequests';
 import AdminServiceRequests from './components/AdminServiceRequests';
 import About from './components/About';
 import FavoritesPage from './components/FavoritesPage';
+import PasswordReset from './components/PasswordReset';
+import UpdatePassword from './components/UpdatePassword';
 
 import './App.css';
 
@@ -33,6 +35,8 @@ function App() {
                         <Routes>
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/reset-password" element={<PasswordReset />} />
+                            <Route path="/update-password" element={<UpdatePassword />} />
 
                             {/* ADMIN */}
                             <Route

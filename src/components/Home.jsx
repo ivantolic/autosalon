@@ -24,7 +24,7 @@ const carouselData = [
     title: "Nova Škoda Kodiaq",
     subtitle: "Tehnologija, prostor i elegancija za cijelu obitelj.",
     cta: "Pogledaj našu Škoda ponudu",
-    link: "/vozila?brand=Škoda",
+    link: "/vozila?brand=Skoda",
   },
   {
     image: heroSeatArona,

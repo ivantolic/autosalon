@@ -77,3 +77,49 @@
   text-align: center;
   font-weight: 600;
 }
+
+.forgot-password-link {
+  text-align: right;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.forgot-password-link a {
+  color: #ffcc00;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.forgot-password-link a:hover {
+  text-decoration: underline;
+  color: #cba700;
+}
+
+/* Dodaj poruku za uspjesan reset */
+.success-message {
+  color: green;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.forgot-password-link {
+  text-align: right;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.forgot-password-link a {
+  color: #ffcc00;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.forgot-password-link a:hover {
+  text-decoration: underline;
+  color: #cba700;
+}

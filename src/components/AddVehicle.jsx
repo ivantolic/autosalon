@@ -682,6 +682,7 @@ const AddVehicle = () => {
             <input
               id="color"
               name="color"
+              type="text"
               placeholder="Boja"
               value={form.color}
               onChange={handleFormChange}
@@ -776,6 +777,7 @@ const AddVehicle = () => {
               onChange={e => setAdditionalImages(prev => [...prev, ...Array.from(e.target.files)])}
               ref={additionalInputRef}
             />
+            <span className="file-count">Broj odabranih slika: {additionalImages.length}</span>
             <div className="additional-previews">
               {additionalPreviews.map((src, idx) => (
                 <div

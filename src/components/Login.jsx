@@ -58,6 +58,9 @@ const Login = () => {
                 Nemate račun?{' '}
                 <Link to='/register'>Registrirajte se</Link>
             </p>
+            <p className="forgot-password-link">
+                <Link to="/reset-password">Zaboravljena lozinka?</Link>
+            </p>
             {error && <p className="error-message">{error}</p>}
         </div>
     );
