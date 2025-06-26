@@ -104,7 +104,7 @@ const PurchaseRequest = () => {
           />
         </label>
         <label>
-          Kontakt broj telefona:
+          Kontakt (telefon/mail):
           <input
             type="text"
             name="contact"
