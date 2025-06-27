@@ -261,6 +261,7 @@ const EditVehicle = () => {
               id="color"
               name="color"
               placeholder="Boja"
+              type="text"
               value={form.color}
               onChange={handleFormChange}
             />
